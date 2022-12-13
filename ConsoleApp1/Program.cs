@@ -27,11 +27,6 @@ Console.WriteLine("");
 
 
 
-
-
-
-
-
 //var c = new Country(-5, "");
 //c.Validate();
 //foreach(var e in c.Errors)
@@ -40,19 +35,3 @@ Console.WriteLine("");
 //Regex regex = new ("[0-9]{4}[A-Z]{2}$", RegexOptions.IgnoreCase);
 //Console.WriteLine(regex.IsMatch("1234Ac"));
 
-//A.test(out B k);
-//Console.WriteLine(k.z);
-
-//class A
-//{
-//    public static void test (out B b)
-//    {
-//        b = new B();
-//        b.z = 55;
-//    }
-//}
-
-//class B
-//{
-//    public int z;
-//}

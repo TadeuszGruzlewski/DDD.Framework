@@ -5,6 +5,12 @@
 	  <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>DDD.Foundations</PackageId>
+    <Title>Foundations for the DDD solutions</Title>
+    <Version>1.0.0</Version>
+    <Company>ConsArt</Company>
+    <Description>Foundations for the DDD solutions</Description>
   </PropertyGroup>
 
   <ItemGroup>

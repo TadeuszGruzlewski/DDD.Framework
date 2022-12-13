@@ -5,6 +5,9 @@
 	  <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>DDD.Primitives</PackageId>
+    <Title>Domain Primitives for DDD solutions</Title>
   </PropertyGroup>
 
   <ItemGroup>

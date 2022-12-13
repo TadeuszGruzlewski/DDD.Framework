@@ -12,9 +12,25 @@ public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject
 
     public VO? Build()
     {
-//        ValueObject?.Validate<VO>(errors);
+        ValueObject?.Validate<VO>(errors);
 
         ValueObject?.Validate(errors);
         return errors.Any() ? null : ValueObject;
     }
+
+    //public VO? Build<T>(T id) where T : EntityId
+    //{
+    //    //        ValueObject?.Validate<VO>(errors);
+
+    //    ValueObject?.Validate(errors);
+    //    return errors.Any() ? null : ValueObject;
+    //}
+
+    //public VO? Build<T>(T id) where T : Primitive
+    //{
+    //    //        ValueObject?.Validate<VO>(errors);
+
+    //    ValueObject?.Validate(errors);
+    //    return errors.Any() ? null : ValueObject;
+    //}
 }

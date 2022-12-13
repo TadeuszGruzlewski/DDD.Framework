@@ -2,9 +2,9 @@
 
 //namespace DDD.Examples.Baggage;
 
-//public interface IBaggageAllowance
+//public interface IBaggageAllowance1
 //{
-//    private record class BaggageInvariant(List<InvariantError> Errors) : Invariant(Errors)
+//    protected record class BaggageInvariant(List<InvariantError> Errors) : Invariant(Errors)
 //    {
 //        public bool IsAllowedNumber(List<BaggageItem> baggageItems, int allowedNumber)
 //        {
@@ -38,5 +38,8 @@
 //    decimal MaxWeightOfCabinBaggage { get; }
 //    decimal MaxWeightOfCheckedSingleBaggage { get; }
 
-//    bool IsBaggageAllowed(Baggage baggage, List<InvariantError> errors);
+//    bool IsBaggageAllowed(Baggage baggage, List<InvariantError> errors)
+//    {
+//        return true;
+//    }
 //}

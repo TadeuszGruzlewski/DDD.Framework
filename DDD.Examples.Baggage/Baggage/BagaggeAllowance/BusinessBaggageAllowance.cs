@@ -1,4 +1,6 @@
 ﻿
+using DDD.Foundations;
+
 namespace DDD.Examples.Baggage;
 
 public class BusinessBaggageAllowance : BaggageAllowance
@@ -9,4 +11,11 @@ public class BusinessBaggageAllowance : BaggageAllowance
 
     public override decimal AllowedWeightOfAllCabinBaggage => 18;
     public override decimal AllowedWeightOfOneCheckedBaggage => 32;
+
+    public bool Validate(List<InvariantError> errors)
+    {
+        errors.Add(new InvariantError(InvariantErrorCode.WrongFormat, " Test "));
+
+        return true;
+    }
 }
