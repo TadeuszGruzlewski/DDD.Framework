@@ -4,7 +4,7 @@ namespace DDD.Primitives.Addresses;
 
 public record class Country(int Code, string Name) : ValueObject
 {
-    protected override bool AssertInvariants(List<InvariantError> errors)
+    protected override bool LocalValidate(List<InvariantError> errors)
     {
         var invariant = new Invariant(errors);
         return invariant.IsPositiveInt(Code, nameof(Code)) &

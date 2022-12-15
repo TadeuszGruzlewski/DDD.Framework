@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 Console.WriteLine("");
 
 
-
 //var myId = new MyId(1);
 //var MyEntityBuilder = new EntityBuilder<MyEntity, MyId>(myId);
 //var y = MyEntityBuilder.Build();

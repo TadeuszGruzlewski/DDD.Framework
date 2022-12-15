@@ -6,13 +6,13 @@ public abstract record class ValueObject
     public bool IsValidated { get; private set; } = false;
     public bool? IsValid { get; private set; } = null;
 
-    protected abstract bool AssertInvariants(List<InvariantError> errors);
+    protected abstract bool LocalValidate(List<InvariantError> errors);
 
     public bool Validate(List<InvariantError> errors)
     {
         if (!IsValidated)
         {
-            IsValid = AssertInvariants(errors);
+            IsValid = LocalValidate(errors);
             IsValidated = true;
         }
         return (bool)IsValid!;

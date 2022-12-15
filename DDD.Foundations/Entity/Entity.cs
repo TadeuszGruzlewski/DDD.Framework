@@ -10,9 +10,6 @@ public abstract class Entity<TId> : Entity where TId : EntityId
 {
     public TId Id { get; init; }
 
-    //protected Entity()
-    //{ }
-
     protected Entity(TId id)
     {
         if (id is null)
@@ -29,7 +26,7 @@ public abstract class Entity<TId> : Entity where TId : EntityId
         e1 is null && e2 is null || e1 is not null && e1.Equals(e2);
     public static bool? operator !=(Entity<TId>? e1, Entity<TId>? e2) => !(e1 == e2);
 
-    public override bool Equals(object? obj)
+    public sealed override bool Equals(object? obj)
     {
         if (obj == null)
             return false;
@@ -39,5 +36,5 @@ public abstract class Entity<TId> : Entity where TId : EntityId
         return Id == entity.Id;
     }
 
-    public override int GetHashCode() => Id.GetHashCode();
+    public sealed override int GetHashCode() => Id.GetHashCode();
 }

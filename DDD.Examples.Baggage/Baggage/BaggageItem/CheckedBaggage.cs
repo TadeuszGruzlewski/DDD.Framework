@@ -6,5 +6,5 @@ public record class CheckedBaggage(BaggageSize Size, decimal Weight) : BaggageIt
     public const int SumOfDimensions = 158;
 
     public override bool IsAllowedSize() => 
-        BaggageSize.Minimum < Size && Size.Length + Size.Width + Size.Length < SumOfDimensions;
+        BaggageSize.Minimum < Size && Size.Length + Size.Width + Size.Height < SumOfDimensions;
 }

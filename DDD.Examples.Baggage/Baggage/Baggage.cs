@@ -17,7 +17,7 @@ public record class Baggage : ValueObject
     public List<BaggageItem> CheckedBaggage => baggage.Where(b => b.GetType() == typeof(CheckedBaggage)).ToList();
 
 
-    protected override bool AssertInvariants(List<InvariantError> errors)
+    protected override bool LocalValidate(List<InvariantError> errors)
     {
         var result = true;
 
@@ -26,8 +26,8 @@ public record class Baggage : ValueObject
         if (Allowance is not null)
             result &= BaggageAllowanceValidator.IsBaggageAllowed(errors, this, Allowance);
 
-        //foreach (var item in baggage)
-        //    result &= item.Validate(errors);
+        foreach (var item in baggage)
+            result &= item.Validate(errors);
 
         return result;
     }
