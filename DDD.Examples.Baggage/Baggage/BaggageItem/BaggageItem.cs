@@ -17,7 +17,7 @@ public abstract record class BaggageItem(BaggageSize Size, decimal Weight) : Val
 
     public abstract bool IsAllowedSize();
 
-    public override bool AssertInvariants(List<InvariantError> errors)
+    protected override bool AssertInvariants(List<InvariantError> errors)
     {
         var invariant = new BaggageInvariant(errors);
         return invariant.IsAllowedSize(this);

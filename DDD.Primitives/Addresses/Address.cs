@@ -10,7 +10,7 @@ public record class Address(
     PostalCode PostalCode,
     Country Country) : ValueObject
 {
-    public override bool AssertInvariants(List<InvariantError> errors)
+    protected override bool AssertInvariants(List<InvariantError> errors)
     {
         var invariant = new Invariant(errors);
         return invariant.IsNotNullOrEmpty(StreetName, nameof(StreetName)) &
