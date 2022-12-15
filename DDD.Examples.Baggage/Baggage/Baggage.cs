@@ -16,17 +16,18 @@ public record class Baggage : ValueObject
     public List<BaggageItem> CabinBaggage => baggage.Where(b => b.GetType() == typeof(Accessory) | b.GetType() == typeof(HandBaggage)).ToList();
     public List<BaggageItem> CheckedBaggage => baggage.Where(b => b.GetType() == typeof(CheckedBaggage)).ToList();
 
-    public override bool AssertInvariants(List<InvariantError> errors)
+
+    protected override bool AssertInvariants(List<InvariantError> errors)
     {
         var result = true;
 
         var invariant = new Invariant(errors);
         invariant.IsNotNullReference(Allowance, nameof(Allowance));
         if (Allowance is not null)
-            result &= Allowance.IsBaggageAllowed(this, errors);
+            result &= BaggageAllowanceValidator.IsBaggageAllowed(errors, this, Allowance);
 
-        foreach (var item in baggage)
-            result &= item.AssertInvariants(errors);
+        //foreach (var item in baggage)
+        //    result &= item.Validate(errors);
 
         return result;
     }
