@@ -4,7 +4,7 @@ namespace DDD.Examples.Baggage;
 
 public record class Baggage : ValueObject
 {
-    public IBaggageAllowance? Allowance { get; internal set; }
+    public BaggageAllowance? Allowance { get; internal set; }
     private readonly List<BaggageItem> baggage = new();
 
     internal Baggage() { }

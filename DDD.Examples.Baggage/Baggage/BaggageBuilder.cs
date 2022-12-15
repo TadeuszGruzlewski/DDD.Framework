@@ -4,7 +4,7 @@ namespace DDD.Examples.Baggage;
 
 public class BaggageBuilder<T> : VOBuilder<T> where T : Baggage
 {
-    public BaggageBuilder<T> SetAllowance(IBaggageAllowance baggageAllowance)
+    public BaggageBuilder<T> SetAllowance(BaggageAllowance baggageAllowance)
     {
         ValueObject!.Allowance = baggageAllowance;
         return this;
