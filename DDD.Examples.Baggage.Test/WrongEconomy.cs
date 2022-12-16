@@ -14,4 +14,36 @@ public class WrongEconomy
 
         Assert.IsTrue(B.Errors.Any());
     }
+
+    [Test]
+    public void CheckedBaggageExceeds1ItemAndHandExceeds1Item()
+    {
+        var B = new BaggageBuilder<Baggage>();
+
+        var baggage = B
+            .SetAllowance(new EconomyBaggageAllowance())
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
+            .Build();
+
+        Assert.IsTrue(B.Errors.Count == 2);
+    }
+
+    [Test]
+    public void CheckedBaggageExceeds1ItemCabinExceedsWeight()
+    {
+        var B = new BaggageBuilder<Baggage>();
+
+        var baggage = B
+            .SetAllowance(new EconomyBaggageAllowance())
+            .AddAccessory(new BaggageSize(30, 20, 10), 15)
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
+            .Build();
+
+        Assert.IsTrue(B.Errors.Count == 2);
+    }
 }

@@ -10,7 +10,7 @@ public record class BaggageAllowanceValidator
         {
             var valid = baggageItems.Count <= allowedNumber;
             if (!valid)
-                Errors.Add(new(InvariantErrorCode.OutsideRange, $"Number of baggage items exceeds the allowed limit."));
+                Errors.Add(new(InvariantErrorCode.AboveMaximum, $"Number of baggage items exceeds the allowed limit."));
             return valid;
         }
 
@@ -19,7 +19,7 @@ public record class BaggageAllowanceValidator
             var totalWeight = baggageItems.Sum(w => w.Weight);
             var valid = totalWeight <= allowedWeight;
             if (!valid)
-                Errors.Add(new(InvariantErrorCode.OutsideRange, $"Cabin baggage weight exceeds the allowed limit."));
+                Errors.Add(new(InvariantErrorCode.AboveMaximum, $"Cabin baggage weight exceeds the allowed limit."));
             return valid;
         }
 
@@ -27,7 +27,7 @@ public record class BaggageAllowanceValidator
         {
             var valid = baggageItem.Weight <= allowedWeight;
             if (!valid)
-                Errors.Add(new(InvariantErrorCode.OutsideRange, $"Baggage item weight exceeds the allowed limit."));
+                Errors.Add(new(InvariantErrorCode.AboveMaximum, $"Baggage item weight exceeds the allowed limit."));
             return valid;
         }
     }
@@ -37,9 +37,9 @@ public record class BaggageAllowanceValidator
         var invariant = new BaggageInvariant(errors);
 
         var valid =
-            invariant.IsAllowedNumber(baggage.Accessories, allowance.NumberOfAccessories) &&
-            invariant.IsAllowedNumber(baggage.HandBaggage, allowance.NumberOfHandBaggages) &&
-            invariant.IsAllowedNumber(baggage.CheckedBaggage, allowance.NumberOfCheckedBaggages) &&
+            invariant.IsAllowedNumber(baggage.Accessories, allowance.NumberOfAccessories) &
+            invariant.IsAllowedNumber(baggage.HandBaggage, allowance.NumberOfHandBaggages) &
+            invariant.IsAllowedNumber(baggage.CheckedBaggage, allowance.NumberOfCheckedBaggages) &
             invariant.IsCabinAllowedWeight(baggage.CabinBaggage, allowance.WeightOfAllCabinBaggage);
 
         foreach (var item in baggage.CheckedBaggage)
