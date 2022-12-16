@@ -32,23 +32,6 @@ public record class BaggageAllowanceValidator
         }
     }
 
-    //protected override bool AssertInvariants(List<InvariantError> errors)
-    //public bool IsBaggageAllowed(Baggage baggage, List<InvariantError> errors)
-    //{
-    //    var invariant = new BaggageInvariant(errors);
-
-    //    var valid =
-    //        invariant.IsAllowedNumber(Baggage.Accessories, Allowance.NumberOfAccessories) &&
-    //        invariant.IsAllowedNumber(Baggage.HandBaggage, Allowance.NumberOfHandBaggages) &&
-    //        invariant.IsAllowedNumber(Baggage.CheckedBaggage, Allowance.NumberOfCheckedBaggages) &&
-    //        invariant.IsCabinAllowedWeight(Baggage.CabinBaggage, Allowance.WeightOfAllCabinBaggage);
-
-    //    foreach (var item in Baggage.CheckedBaggage)
-    //        valid &= invariant.IsCheckedAllowedWeight(item, Allowance.WeightOfOneCheckedBaggage);
-
-    //    return valid;
-    //}
-
     public static bool IsBaggageAllowed(List<InvariantError> errors, Baggage baggage, BaggageAllowance allowance)
     {
         var invariant = new BaggageInvariant(errors);
