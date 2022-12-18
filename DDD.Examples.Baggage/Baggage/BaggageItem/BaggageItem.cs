@@ -4,22 +4,22 @@ namespace DDD.Examples.Baggage;
 
 public abstract record class BaggageItem(BaggageSize Size, decimal Weight) : ValueObject
 {
-    private record class BaggageInvariant(List<InvariantError> Errors) : Invariant(Errors)
+    private record class LocalValidator(NotificationCollector Collector) : InvariantValidator(Collector)
     {
         public bool IsAllowedSize(BaggageItem baggageItem)
         {
             var valid = baggageItem.IsAllowedSize();
             if (!valid)
-                Errors.Add(new(InvariantErrorCode.AboveMaximum, $"Baggage size exceeds allowed dimensions."));
+                AddError(InvariantErrorCode.AboveMaximum, $"Baggage size exceeds allowed dimensions.");
             return valid;
         }
     }
 
     public abstract bool IsAllowedSize();
 
-    protected override bool LocalValidate(List<InvariantError> errors)
+    protected override bool LocalValidate(NotificationCollector collector)
     {
-        var invariant = new BaggageInvariant(errors);
-        return invariant.IsAllowedSize(this);
+        var validator = new LocalValidator(collector);
+        return validator.IsAllowedSize(this);
     }
 }

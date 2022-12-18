@@ -12,7 +12,7 @@ public class WrongBussines
             .AddAccessory(new BaggageSize(10, 10, 10), 5)
             .Build();
 
-        Assert.IsTrue(B.Errors.Any());
+        Assert.IsTrue(B.Collector.HasErrors);
     }
 
     [Test]
@@ -25,7 +25,7 @@ public class WrongBussines
             .AddAccessory(new BaggageSize(10, 10, 100), 50)
             .Build();
 
-        Assert.IsTrue(B.Errors.Count == 2);
+        Assert.IsTrue(B.Collector.ErrorsCount == 2);
     }
 
     [Test]
@@ -39,7 +39,7 @@ public class WrongBussines
             .AddAccessory(new BaggageSize(10, 10, 10), 5)
             .Build();
 
-        Assert.IsTrue(B.Errors.Any());
+        Assert.IsTrue(B.Collector.HasErrors);
     }
 
     [Test]
@@ -54,7 +54,7 @@ public class WrongBussines
             .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
             .Build();
 
-        Assert.IsTrue(B.Errors.Any());
+        Assert.IsTrue(B.Collector.HasErrors);
     }
 
     [Test]
@@ -67,7 +67,7 @@ public class WrongBussines
             .AddCheckedBaggage(new BaggageSize(10, 100, 100), 50)
             .Build();
 
-        Assert.IsTrue(B.Errors.Count == 2);
+        Assert.IsTrue(B.Collector.ErrorsCount == 2);
     }
 
     [Test]
@@ -82,7 +82,7 @@ public class WrongBussines
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
             .Build();
 
-        Assert.IsTrue(B.Errors.Any());
+        Assert.IsTrue(B.Collector.HasErrors);
     }
 
 }

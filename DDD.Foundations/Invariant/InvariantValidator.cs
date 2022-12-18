@@ -2,13 +2,16 @@
 
 namespace DDD.Foundations;
 
-public record class Invariant(List<InvariantError> Errors)
+public record class InvariantValidator(NotificationCollector Collector)
 {
+    protected void AddError(InvariantErrorCode errorCode, string errorMessage, string? fieldName = null) 
+        => Collector.AddError(new InvariantError(errorCode, errorMessage, fieldName));
+
     public bool IsNotNullArgument(object? obj, string name)
     {
         var valid = obj is not null;
         if (!valid)
-            Errors.Add(new(InvariantErrorCode.NullArgument, $"{name} cannot be null", name));
+            AddError(InvariantErrorCode.NullArgument, $"{name} cannot be null", name);
         return valid;
     }
 
@@ -16,7 +19,7 @@ public record class Invariant(List<InvariantError> Errors)
     {
         var valid = obj is not null;
         if (!valid)
-            Errors.Add(new(InvariantErrorCode.NullReference, $"{name} cannot be null", name));
+            AddError(InvariantErrorCode.NullReference, $"{name} cannot be null", name);
         return valid;
     }
 
@@ -24,7 +27,7 @@ public record class Invariant(List<InvariantError> Errors)
     {
         var valid = !string.IsNullOrWhiteSpace(field);
         if (!valid)
-            Errors.Add(new(InvariantErrorCode.NullOrEmpty, $"{name} cannot be null or empty", name));
+            AddError(InvariantErrorCode.NullOrEmpty, $"{name} cannot be null or empty", name);
         return valid;
     }
 
@@ -32,7 +35,7 @@ public record class Invariant(List<InvariantError> Errors)
     {
         var valid = field > 0;
         if (!valid)
-            Errors.Add(new(InvariantErrorCode.WrongType, $"{name} must be a positive integer number", name));
+            AddError(InvariantErrorCode.WrongType, $"{name} must be a positive integer number", name);
         return valid;
     }
 
@@ -40,10 +43,10 @@ public record class Invariant(List<InvariantError> Errors)
     {
         var valid1 = string.IsNullOrWhiteSpace(field);
         if (!valid1)
-            Errors.Add(new(InvariantErrorCode.NullOrEmpty, $"{name} cannot be null or empty", name));
+            AddError(InvariantErrorCode.NullOrEmpty, $"{name} cannot be null or empty", name);
         var valid2 = int.TryParse(field, out var number) && number >= 0;
         if (!valid2)
-            Errors.Add(new(InvariantErrorCode.WrongType, $"{name} must be a positive integer number", name));
+            AddError(InvariantErrorCode.WrongType, $"{name} must be a positive integer number", name);
         return valid1 && valid2;
     }
 
@@ -51,7 +54,7 @@ public record class Invariant(List<InvariantError> Errors)
     {
         var valid = regex.IsMatch(field);
         if (!valid)
-            Errors.Add(new(InvariantErrorCode.WrongType, $"{name} must be a positive integer number", name));
+            AddError(InvariantErrorCode.WrongType, $"{name} must be a positive integer number", name);
         return valid;
     }
 
@@ -59,7 +62,7 @@ public record class Invariant(List<InvariantError> Errors)
     {
         var valid = regex.IsMatch(field);
         if (!valid)
-            Errors.Add(new(InvariantErrorCode.BelowMinimum, $"{name} must be above {minimum}", name));
+            AddError(InvariantErrorCode.BelowMinimum, $"{name} must be above {minimum}", name);
         return valid;
     }
 
@@ -67,7 +70,7 @@ public record class Invariant(List<InvariantError> Errors)
     {
         var valid = regex.IsMatch(field);
         if (!valid)
-            Errors.Add(new(InvariantErrorCode.AboveMaximum, $"{name} must be below {maximum}", name));
+            AddError(InvariantErrorCode.AboveMaximum, $"{name} must be below {maximum}", name);
         return valid;
     }
 
