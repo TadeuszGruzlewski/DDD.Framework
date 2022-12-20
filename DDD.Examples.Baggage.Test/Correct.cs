@@ -6,33 +6,34 @@ public class Correct
     [Test]
     public void Economy()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-         var baggage = B
+        MyBaggage = B
             .SetAllowance(new EconomyBaggageAllowance())
-            .AddAccessory(new BaggageSize(10, 10, 10), 5)
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
-            .AddCheckedBaggage(new BaggageSize(50, 30, 30), 20)
+            .AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Bag")
+            .AddCheckedBaggage(new BaggageSize(50, 30, 30), 20, "Suitcase")
             .Build();
 
-        Assert.That(baggage, Is.Not.Null);
+        Assert.That(MyBaggage, Is.Not.Null);
     }
 
     [Test]
     public void Business()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;             
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
-            .AddAccessory(new BaggageSize(10, 10, 10), 5)
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
-            .AddHandBaggage(new BaggageSize(50, 20, 15), 7)
-            .AddCheckedBaggage(new BaggageSize(50, 30, 30), 20)
-            .AddCheckedBaggage(new BaggageSize(50, 40, 20), 30)
+        MyBaggage = B
+            .AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Bag")
+            .AddHandBaggage(new BaggageSize(50, 20, 15), 7, "Small suitcase")
+            .AddCheckedBaggage(new BaggageSize(50, 30, 30), 20, "Black suitcase")
+            .AddCheckedBaggage(new BaggageSize(50, 40, 20), 30, "Red suitcase")
             .SetAllowance(new BusinessBaggageAllowance())
             .Build();
 
-        Assert.That(baggage, Is.Not.Null);
+        Assert.That(MyBaggage, Is.Not.Null);
     }
 }
-

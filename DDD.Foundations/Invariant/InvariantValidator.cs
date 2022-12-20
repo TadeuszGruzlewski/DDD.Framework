@@ -4,7 +4,7 @@ namespace DDD.Foundations;
 
 public record class InvariantValidator(NotificationCollector Collector)
 {
-    protected void AddError(InvariantErrorCode errorCode, string errorMessage, string? fieldName = null) 
+    protected void AddError(InvariantErrorCode errorCode, string errorMessage, string fieldName) 
         => Collector.AddError(new InvariantError(errorCode, errorMessage, fieldName));
 
     public bool IsNotNullArgument(object? obj, string name)

@@ -6,10 +6,11 @@ public class WrongEconomy
     [Test]
     public void NoAllowanceSpecified()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
-            .AddAccessory(new BaggageSize(10, 10, 10), 5)
+        MyBaggage = B
+            .AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
             .Build();
 
         Assert.IsTrue(B.Collector.HasErrors);
@@ -18,14 +19,15 @@ public class WrongEconomy
     [Test]
     public void CheckedBaggageExceeds1ItemAndHandExceeds1Item()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
+        MyBaggage = B
             .SetAllowance(new EconomyBaggageAllowance())
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Bag")
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Suitcase")
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Black suitcase")
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Red suitcase")
             .Build();
 
         Assert.IsTrue(B.Collector.ErrorsCount == 2);
@@ -34,14 +36,15 @@ public class WrongEconomy
     [Test]
     public void CheckedBaggageExceeds1ItemCabinExceedsWeight()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
+        MyBaggage = B
             .SetAllowance(new EconomyBaggageAllowance())
-            .AddAccessory(new BaggageSize(30, 20, 10), 15)
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
+            .AddAccessory(new BaggageSize(30, 20, 10), 15, "Laptop")
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Bag")
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Black suitcase")
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Red suitcase")
             .Build();
 
         Assert.IsTrue(B.Collector.ErrorsCount == 2);

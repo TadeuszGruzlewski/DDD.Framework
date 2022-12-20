@@ -1,7 +1,7 @@
 ﻿
 namespace DDD.Examples.Baggage;
 
-public record class CheckedBaggage(BaggageSize Size, decimal Weight) : BaggageItem(Size, Weight)
+public record class CheckedBaggage(BaggageSize Size, decimal Weight, string Description) : BaggageItem(Size, Weight, Description)
 {
     public const int SumOfDimensions = 158;
 

@@ -6,10 +6,11 @@ public class WrongBussines
     [Test]
     public void NoAllowanceSpecified()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
-            .AddAccessory(new BaggageSize(10, 10, 10), 5)
+        MyBaggage = B
+            .AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
             .Build();
 
         Assert.IsTrue(B.Collector.HasErrors);
@@ -18,11 +19,12 @@ public class WrongBussines
     [Test]
     public void AccessoryExceedsSizeAndWeight()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
+        MyBaggage = B
             .SetAllowance(new BusinessBaggageAllowance())
-            .AddAccessory(new BaggageSize(10, 10, 100), 50)
+            .AddAccessory(new BaggageSize(10, 10, 100), 50, "Laptop")
             .Build();
 
         Assert.IsTrue(B.Collector.ErrorsCount == 2);
@@ -31,12 +33,13 @@ public class WrongBussines
     [Test]
     public void AccessoryExceeds1Item()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
+        MyBaggage = B
             .SetAllowance(new BusinessBaggageAllowance())
-            .AddAccessory(new BaggageSize(10, 10, 10), 5)
-            .AddAccessory(new BaggageSize(10, 10, 10), 5)
+            .AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
+            .AddAccessory(new BaggageSize(10, 10, 10), 5, "Camera")
             .Build();
 
         Assert.IsTrue(B.Collector.HasErrors);
@@ -45,13 +48,14 @@ public class WrongBussines
     [Test]
     public void HandBaggageExceeds2Items()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
+        MyBaggage = B
             .SetAllowance(new BusinessBaggageAllowance())
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5)
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Small suitcase")
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Bag")
+            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Another bag")
             .Build();
 
         Assert.IsTrue(B.Collector.HasErrors);
@@ -60,11 +64,12 @@ public class WrongBussines
     [Test]
     public void CheckedBaggageExceedsSizeAndWeight()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
+        MyBaggage = B
             .SetAllowance(new BusinessBaggageAllowance())
-            .AddCheckedBaggage(new BaggageSize(10, 100, 100), 50)
+            .AddCheckedBaggage(new BaggageSize(10, 100, 100), 50, "Suitcase")
             .Build();
 
         Assert.IsTrue(B.Collector.ErrorsCount == 2);
@@ -73,13 +78,14 @@ public class WrongBussines
     [Test]
     public void CheckedBaggageExceeds2Items()
     {
-        var B = new BaggageBuilder<Baggage>();
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
 
-        var baggage = B
+        MyBaggage = B
             .SetAllowance(new BusinessBaggageAllowance())
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5)
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Small suitcase")
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Big suitcase")
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Another suitcase")
             .Build();
 
         Assert.IsTrue(B.Collector.HasErrors);
