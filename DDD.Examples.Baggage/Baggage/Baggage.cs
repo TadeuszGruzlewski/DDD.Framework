@@ -17,7 +17,7 @@ public record class Baggage : ValueObject
     public List<BaggageItem> CheckedBaggage => baggage.Where(b => b.GetType() == typeof(CheckedBaggage)).ToList();
 
 
-    protected override bool LocalValidate(NotificationCollector collector, string objectName)
+    protected override bool LocalValidate(NotificationCollector collector)
     {
         var result = true;
 
@@ -27,7 +27,7 @@ public record class Baggage : ValueObject
         var validator = new InvariantValidator(collector);
         validator.IsNotNullReference(Allowance, nameof(Allowance));
         if (Allowance is not null)
-            result &= BaggageAllowanceValidator.IsBaggageAllowed(collector, this, Allowance, objectName);
+            result &= BaggageAllowanceValidator.IsBaggageAllowed(collector, this, Allowance);
 
         return result;
     }

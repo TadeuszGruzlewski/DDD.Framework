@@ -32,7 +32,7 @@ public record class BaggageAllowanceValidator
         }
     }
 
-    public static bool IsBaggageAllowed(NotificationCollector collector, Baggage baggage, BaggageAllowance allowance, string fieldName)
+    public static bool IsBaggageAllowed(NotificationCollector collector, Baggage baggage, BaggageAllowance allowance)
     {
         var validator = new LocalValidator(collector);
 

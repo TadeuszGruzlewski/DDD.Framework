@@ -1,4 +1,4 @@
 ﻿namespace DDD.Foundations;
 
-public record class InvariantError(InvariantErrorCode ErrorCode, string ErrorMessage, string Details) : 
-    Error(ErrorCode, ErrorMessage);
+public record class InvariantError(InvariantErrorCode ErrorCode, string Message, string Details) : 
+    Error(ErrorCode, Message);

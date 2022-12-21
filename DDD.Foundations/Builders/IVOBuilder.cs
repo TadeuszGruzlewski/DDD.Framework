@@ -2,5 +2,5 @@
 
 public interface IVOBuilder<VO> where VO : ValueObject
 {
-    VO? Build();
+    VO? Build(string objectName);
 }

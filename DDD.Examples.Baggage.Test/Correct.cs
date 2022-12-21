@@ -7,14 +7,14 @@ public class Correct
     public void Economy()
     {
         Baggage? MyBaggage;
-        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
+        var B = new BaggageBuilder();
 
         MyBaggage = B
             .SetAllowance(new EconomyBaggageAllowance())
             .AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
             .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Bag")
             .AddCheckedBaggage(new BaggageSize(50, 30, 30), 20, "Suitcase")
-            .Build();
+            .Build(nameof(MyBaggage));
 
         Assert.That(MyBaggage, Is.Not.Null);
     }
@@ -23,7 +23,7 @@ public class Correct
     public void Business()
     {
         Baggage? MyBaggage;             
-        var B = new BaggageBuilder<Baggage>(nameof(MyBaggage));
+        var B = new BaggageBuilder();
 
         MyBaggage = B
             .AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
@@ -32,7 +32,7 @@ public class Correct
             .AddCheckedBaggage(new BaggageSize(50, 30, 30), 20, "Black suitcase")
             .AddCheckedBaggage(new BaggageSize(50, 40, 20), 30, "Red suitcase")
             .SetAllowance(new BusinessBaggageAllowance())
-            .Build();
+            .Build(nameof(MyBaggage));
 
         Assert.That(MyBaggage, Is.Not.Null);
     }
