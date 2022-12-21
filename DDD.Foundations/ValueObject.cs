@@ -12,7 +12,7 @@ public abstract record class ValueObject
     {
         if (!IsValidated)
         {
-            collector.ExpandContext(objectName);
+            collector.ExtendContext(objectName);
             IsValid = LocalValidate(collector);
             collector.ReduceContext();
             IsValidated = true;

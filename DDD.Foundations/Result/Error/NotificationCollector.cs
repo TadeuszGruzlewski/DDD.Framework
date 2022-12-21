@@ -3,11 +3,10 @@ namespace DDD.Foundations;
 
 public record class NotificationCollector
 {
-    public string? Context { get; private set; }
-    public void ExpandContext(string fieldName) =>
-        Context = (Context is null ? "" : Context + " >>> ") + fieldName;
-    public void ReduceContext() =>
-        Context = Context?[..(Context?.LastIndexOf(" >>> ") == -1 ? 0 : Context!.Length)];   
+    public string? Context => string.Join(" >>> ", context);
+    private readonly List<string> context = new();
+    public void ExtendContext(string fieldName) => context.Add(fieldName);
+    public void ReduceContext() => context.RemoveAt(context.Count-1);  
 
     public IReadOnlyCollection<Error> Errors => errors;
     private readonly List<Error> errors = new();
