@@ -10,8 +10,7 @@ public abstract record class BaggageItem(BaggageSize Size, decimal Weight, strin
         {
             var valid = baggageItem.IsAllowedSize();
             if (!valid)
-                AddError(InvariantErrorCode.AboveMaximum, "");
- //           AddError(InvariantErrorCode.AboveMaximum, $"Baggage size exceeds allowed dimensions.", "");
+                AddError(InvariantErrorCode.AboveMaximum, baggageItem.Description, $"Baggage size exceeds allowed dimensions {baggageItem.Size}.");
             return valid;
         }
     }

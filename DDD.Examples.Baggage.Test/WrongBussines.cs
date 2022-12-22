@@ -67,7 +67,7 @@ public class WrongBussines
         var B = new BaggageBuilder();
 
         MyBaggage = B
-            .SetAllowance(new BusinessBaggageAllowance())
+    //        .SetAllowance(new BusinessBaggageAllowance())
             .AddCheckedBaggage(new BaggageSize(10, 100, 100), 50, "Suitcase")
             .Build(nameof(MyBaggage));
 
@@ -85,6 +85,27 @@ public class WrongBussines
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Small suitcase")
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Big suitcase")
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Another suitcase")
+            .Build(nameof(MyBaggage));
+
+        Assert.IsTrue(B.Collector.HasErrors);
+    }
+
+    [Test]
+    public void ManyErrors()
+    {
+        Baggage? MyBaggage;
+        var B = new BaggageBuilder();
+
+        MyBaggage = B
+            .SetAllowance(new BusinessBaggageAllowance())
+            .AddAccessory(new BaggageSize(80, 10, 10), 50, "Laptop")
+            .AddAccessory(new BaggageSize(80, 10, 10), 50, "Camera")
+            .AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Small suitcase")
+            .AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Bag")
+            .AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Another bag")
+            .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Small suitcase")
+            .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Big suitcase")
+            .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Another suitcase")
             .Build(nameof(MyBaggage));
 
         Assert.IsTrue(B.Collector.HasErrors);

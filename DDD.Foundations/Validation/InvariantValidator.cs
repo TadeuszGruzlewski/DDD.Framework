@@ -4,8 +4,8 @@ namespace DDD.Foundations;
 
 public record class InvariantValidator(NotificationCollector Collector)
 {
-    protected void AddError(InvariantErrorCode errorCode, string fieldName) 
-        => Collector.AddError(new InvariantError(errorCode, fieldName));
+    protected void AddError(InvariantErrorCode code, string name, string? details = null) =>
+        Collector.AddError(code, name, details);
 
     public bool IsNotNullArgument(object? obj, string name)
     {
@@ -31,27 +31,26 @@ public record class InvariantValidator(NotificationCollector Collector)
         return valid;
     }
 
-    public bool IsPositiveInt(int field, string name)
+    public bool IsPositive(int field, string name)
     {
         var valid = field > 0;
         if (!valid)
-            //            AddError(InvariantErrorCode.WrongType, $"{name} must be a positive integer number", name);
-            AddError(InvariantErrorCode.WrongType, name);
+            AddError(InvariantErrorCode.BelowMinimum, name, "Must be positive");
         return valid;
     }
 
-    public bool IsPositiveInt(string field, string name)
+    public bool IsPositive(string field, string name)
     {
         var valid1 = string.IsNullOrWhiteSpace(field);
         if (!valid1)
             AddError(InvariantErrorCode.NullOrEmpty, name);
         var valid2 = int.TryParse(field, out var number) && number >= 0;
         if (!valid2)
-            AddError(InvariantErrorCode.WrongType, name);
+            AddError(InvariantErrorCode.BelowMinimum, name, "Must be positive");
         return valid1 && valid2;
     }
 
-    //public bool IsCorrectFormat(Regex regex, string field, string name)
+    //public static bool IsCorrectFormat(Regex regex, string field, string name)
     //{
     //    var valid = regex.IsMatch(field);
     //    if (!valid)
@@ -63,8 +62,7 @@ public record class InvariantValidator(NotificationCollector Collector)
     {
         var valid = regex.IsMatch(field);
         if (!valid)
-            AddError(InvariantErrorCode.BelowMinimum, name);
-        //AddError(InvariantErrorCode.BelowMinimum, $"{name} must be above {minimum}", name);
+            AddError(InvariantErrorCode.BelowMinimum, name, $"Must be above {minimum}");       
         return valid;
     }
 
@@ -72,12 +70,11 @@ public record class InvariantValidator(NotificationCollector Collector)
     {
         var valid = regex.IsMatch(field);
         if (!valid)
-            AddError(InvariantErrorCode.AboveMaximum, name);
-        //            AddError(InvariantErrorCode.AboveMaximum, $"{name} must be below {maximum}", name);
+            AddError(InvariantErrorCode.AboveMaximum, name, $"Must be below {maximum}");
         return valid;
     }
 
-    //public bool IsValid(ValueObject valueObject, string name)
+    //public static bool IsValid(ValueObject valueObject, string name)
     //{
     //    var valid = valueObject.IsValid;
     //    if (!valid)
@@ -85,7 +82,7 @@ public record class InvariantValidator(NotificationCollector Collector)
     //    return valid;
     //}
 
-    //public bool IsValid(Entity entity, string name)
+    //public static bool IsValid(Entity entity, string name)
     //{
     //    var valid = entity.IsValid;
     //    if (!valid)

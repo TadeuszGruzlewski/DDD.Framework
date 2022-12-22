@@ -22,7 +22,7 @@ public record class Baggage : ValueObject
         var result = true;
 
         foreach (var item in baggage)
-            result &= item.Validate(collector, item.Description);
+            result &= item.Validate(collector, item.GetType().Name);
 
         var validator = new InvariantValidator(collector);
         validator.IsNotNullReference(Allowance, nameof(Allowance));
