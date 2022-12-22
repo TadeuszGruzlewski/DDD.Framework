@@ -1,5 +1,4 @@
-﻿using System;
-using DDD.Foundations;
+﻿using DDD.Foundations;
 using NUnit.Framework;
 
 namespace NotificationCollectorTests;
@@ -7,7 +6,7 @@ namespace NotificationCollectorTests;
 public class BaseTests
 {
     [Test]
-    public void CreateMyEntityWithNullId_ShouldFail()
+    public void ContextTest()
     {
         //Arrange
         NotificationCollector c = new();
@@ -16,6 +15,8 @@ public class BaseTests
         c.ExtendContext("A");
         c.ExtendContext("B");
         c.ExtendContext("C");
+        c.ExtendContext("D");
+        c.ReduceContext();
         c.ReduceContext();
 
         //Assert

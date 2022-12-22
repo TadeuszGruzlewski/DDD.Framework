@@ -13,7 +13,7 @@ public record class NotificationCollector
     public IReadOnlyCollection<Error> Errors => errors;
     private readonly List<Error> errors = new();
 
-    public void AddError(InvariantError error) => //, string? fieldName = null) => 
+    public void AddError(InvariantError error) =>
         errors.Add(error with { Details = Context + error.Details });
 
     public bool HasErrors => errors.Count > 0;

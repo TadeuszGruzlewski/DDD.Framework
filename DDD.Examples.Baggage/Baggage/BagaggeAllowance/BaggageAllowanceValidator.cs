@@ -10,7 +10,8 @@ public record class BaggageAllowanceValidator
         {
             var valid = baggageItems.Count <= allowedNumber;
             if (!valid)
-                AddError(InvariantErrorCode.AboveMaximum, $"Number of baggage items exceeds the allowed limit.", fieldName);
+                AddError(InvariantErrorCode.AboveMaximum, fieldName);
+            //                AddError(InvariantErrorCode.AboveMaximum, $"Number of baggage items exceeds the allowed limit.", fieldName);
             return valid;
         }
 
@@ -19,7 +20,8 @@ public record class BaggageAllowanceValidator
             var totalWeight = baggageItems.Sum(w => w.Weight);
             var valid = totalWeight <= allowedWeight;
             if (!valid)
-                AddError(InvariantErrorCode.AboveMaximum, $"Cabin baggage weight exceeds the allowed limit.", fieldName);
+                AddError(InvariantErrorCode.AboveMaximum, fieldName);
+            //                AddError(InvariantErrorCode.AboveMaximum, $"Number of baggage items exceeds the allowed limit.", fieldName);
             return valid;
         }
 
@@ -27,7 +29,8 @@ public record class BaggageAllowanceValidator
         {
             var valid = baggageItem.Weight <= allowedWeight;
             if (!valid)
-               AddError(InvariantErrorCode.AboveMaximum, $"Baggage item weight exceeds the allowed limit.", fieldName);
+               AddError(InvariantErrorCode.AboveMaximum, fieldName);
+            //               AddError(InvariantErrorCode.AboveMaximum, $"Baggage item weight exceeds the allowed limit.", fieldName);
             return valid;
         }
     }

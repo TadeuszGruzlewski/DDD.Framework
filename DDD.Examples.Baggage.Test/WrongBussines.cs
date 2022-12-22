@@ -10,7 +10,6 @@ public class WrongBussines
         var B = new BaggageBuilder();
 
         MyBaggage = B
-            .AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
             .Build(nameof(MyBaggage));
 
         Assert.IsTrue(B.Collector.HasErrors);
