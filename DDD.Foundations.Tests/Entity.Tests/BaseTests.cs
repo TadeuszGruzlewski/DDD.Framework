@@ -10,7 +10,7 @@ public class BaseTests
     {
         //Arrange
         MyId? id = null;
-        MyEntity<MyId> entity;
+        MyEntity entity;
 
         //Act and Assert
         Assert.Throws<ArgumentNullException>(() => entity = new(id));
@@ -21,7 +21,7 @@ public class BaseTests
     {
         //Arrange
         MyId id;
-        MyEntity<MyId> entity;
+        MyEntity entity;
 
         //Act
         id = new(10);

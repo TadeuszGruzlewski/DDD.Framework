@@ -1,12 +1,6 @@
 ﻿namespace DDD.Foundations;
 
-public abstract class Entity
-{
-    internal Entity() { }
-}
-
-
-public abstract class Entity<TId> : Entity where TId : EntityId
+public abstract class Entity<TId> where TId : EntityId
 {
     public TId Id { get; init; }
 

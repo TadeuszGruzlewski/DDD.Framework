@@ -10,7 +10,7 @@ public class EqualityTestsByOperators
     {
         //Arrange
         MyId id;
-        MyEntity<MyId> entity1, entity2;
+        MyEntity entity1, entity2;
 
         //Act
         id = new(10);
@@ -26,7 +26,7 @@ public class EqualityTestsByOperators
     {
         //Arrange
         MyId id;
-        MyEntity<MyId> entity1, entity2;
+        MyEntity entity1, entity2;
 
         //Act
         id = new(10);
@@ -42,7 +42,7 @@ public class EqualityTestsByOperators
     {
         //Arrange
         MyId id1, id2;
-        MyEntity<MyId> entity1, entity2;
+        MyEntity entity1, entity2;
 
         //Act
         id1 = new(10);

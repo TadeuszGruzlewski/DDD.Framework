@@ -9,7 +9,7 @@ public record class MyId(long Code) : EntityId
 
 public class MyEntity<TId> : Entity<TId> where TId : MyId
 {
-    // TODO - constructor should be internal
+    // TODO - constructor should be internal/private
     public MyEntity(MyId id) : base((TId)id)
     { }
 }

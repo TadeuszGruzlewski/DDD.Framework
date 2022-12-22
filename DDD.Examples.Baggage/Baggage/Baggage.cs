@@ -7,7 +7,7 @@ public record class Baggage : ValueObject
     public BaggageAllowance? Allowance { get; internal set; }
     private readonly List<BaggageItem> baggage = new();
 
-    internal Baggage() { }
+    private Baggage() { }
 
     public void AddBaggageItem(BaggageItem bagaggeItem) => baggage.Add(bagaggeItem);
 

@@ -10,7 +10,7 @@ public class EqualityOperatorForLiftedTypes
     {
         //Arrange
         MyId id;
-        MyEntity<MyId>? entity1, entity2;
+        MyEntity? entity1, entity2;
 
         //Act
         id = new(10);
@@ -26,7 +26,7 @@ public class EqualityOperatorForLiftedTypes
     {
         //Arrange
         MyId id;
-        MyEntity<MyId>? entity1, entity2;
+        MyEntity? entity1, entity2;
 
         //Act
         id = new(10);
@@ -42,7 +42,7 @@ public class EqualityOperatorForLiftedTypes
     {
         //Arrange
         MyId id;
-        MyEntity<MyId>? entity1, entity2;
+        MyEntity? entity1, entity2;
 
         //Act
         id = new(10);
@@ -58,7 +58,7 @@ public class EqualityOperatorForLiftedTypes
     {
         //Arrange
         MyId id;
-        MyEntity<MyId>? entity1, entity2;
+        MyEntity? entity1, entity2;
 
         //Act
         id = new(10);
@@ -74,7 +74,7 @@ public class EqualityOperatorForLiftedTypes
     {
         //Arrange
         MyId id;
-        MyEntity<MyId>? entity1, entity2;
+        MyEntity? entity1, entity2;
 
         //Act
         id = new(10);
@@ -90,7 +90,7 @@ public class EqualityOperatorForLiftedTypes
     {
         //Arrange
         MyId id;
-        MyEntity<MyId>? entity1, entity2;
+        MyEntity? entity1, entity2;
 
         //Act
         id = new(10);

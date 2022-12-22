@@ -21,16 +21,16 @@ public class BaseTests
     {
         //Arrange
         MyId id;
-        MyEntity<MyId>? entity;
+        MyEntity<MyId>? myEntity;
         MyBuilder b;
 
         //Act
         id = new(10);
         b = new(id);
-        entity = b.Build();
+        myEntity = b.Build(nameof(myEntity));
 
         //Assert
-        Assert.IsTrue(entity?.Id == id);
+        Assert.IsTrue(myEntity?.Id == id);
         Assert.IsTrue(id.Code == 10);
     }
 }

@@ -7,11 +7,11 @@ public record class MyId(long Code) : EntityId
     public override bool IsValid() => true;
 }
 
-public class MyEntity<TId> : Entity<TId> where TId : MyId
+public class MyEntity : Entity<MyId>
 {
     public int? Value { get; private set; }
 
-    public MyEntity(MyId id, int? value = null) : base((TId)id) => Value = value;
+    public MyEntity(MyId id, int? value = null) : base(id) => Value = value;
 }
 
 //public class MyEntity<TId> : Entity<TId> where TId : MyId
@@ -29,9 +29,9 @@ public record class MyId1(long Code) : EntityId
     public override bool IsValid() => true;
 }
 
-public class MyEntity1<TId> : Entity<TId> where TId : MyId1
+public class MyEntity1 : Entity<MyId1>
 {
     public int? Value { get; private set; }
 
-    public MyEntity1(MyId1 id, int? value = null) : base((TId)id) => Value = value;
+    public MyEntity1(MyId1 id, int? value = null) : base(id) => Value = value;
 }

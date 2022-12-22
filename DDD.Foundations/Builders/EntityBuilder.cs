@@ -12,11 +12,10 @@ public abstract class EntityBuilder<E, I> : IEntityBuilder<E, I> where E : Entit
 
     public readonly NotificationCollector Collector = new();
 
-    public E? Build()
+    public E? Build(string objectName)
     {
         return entity;
-
-        //Entity?.Validate(Collector, objectName);
+        //entity?.Validate(Collector, objectName);
         //return Collector.HasErrors ? null : entity;
     }
 }

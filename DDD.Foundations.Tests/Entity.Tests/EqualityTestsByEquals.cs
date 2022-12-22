@@ -11,7 +11,7 @@ public class EqualityTestsByEquals
     {
         //Arrange
         MyId id;
-        MyEntity<MyId>? entity1, entity2;
+        MyEntity? entity1, entity2;
 
         //Act
         id = new(10);
@@ -27,7 +27,7 @@ public class EqualityTestsByEquals
     {
         //Arrange
         MyId id;
-        MyEntity<MyId> entity1, entity2;
+        MyEntity entity1, entity2;
 
         //Act
         id = new(10);
@@ -43,7 +43,7 @@ public class EqualityTestsByEquals
     {
         //Arrange
         MyId id;
-        MyEntity<MyId> entity1, entity2;
+        MyEntity entity1, entity2;
 
         //Act
         id = new(10);
@@ -59,7 +59,7 @@ public class EqualityTestsByEquals
     {
         //Arrange
         MyId id1, id2;
-        MyEntity<MyId> entity1, entity2;
+        MyEntity entity1, entity2;
 
         //Act
         id1 = new(10);
@@ -77,13 +77,14 @@ public class EqualityTestsByEquals
         //Arrange
         MyId id;
         MyId1 id1;
-        Entity entity1, entity2;
+        MyEntity entity1;
+        MyEntity1 entity2;
 
         //Act
         id = new(10);
         id1 = new(10);
-        entity1 = new MyEntity<MyId>(id, 1);
-        entity2 = new MyEntity1<MyId1>(id1, 1);
+        entity1 = new(id, 1);
+        entity2 = new(id1, 1);
 
         //Assert
         Assert.IsFalse(entity1.Equals(entity2));
