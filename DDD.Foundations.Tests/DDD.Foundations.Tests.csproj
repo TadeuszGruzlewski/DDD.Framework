@@ -18,4 +18,8 @@
     <ProjectReference Include="..\DDD.Foundations\DDD.Foundations.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Builders.Tests\" />
+  </ItemGroup>
+
 </Project>

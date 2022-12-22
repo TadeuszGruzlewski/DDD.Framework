@@ -2,7 +2,7 @@
 
 public record class ErrorCode : Enumeration
 {
-    protected ErrorCode(int Code, string Name) : base(Code, Name) { }
+    protected ErrorCode(int Code, string Text) : base(Code, Text) { }
 
     public static readonly ErrorCode NoError = new (0, "No error");
 }
