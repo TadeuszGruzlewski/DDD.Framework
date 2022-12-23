@@ -7,15 +7,23 @@ public abstract class EntityBuilder<E, I> : IEntityBuilder<E, I> where E : Entit
     protected readonly E? entity;
 
     // TODO - CreateInstance for internal constructor of entity
-    public EntityBuilder(I id) =>
-        entity = (E?)Activator.CreateInstance(typeof(E), new object[] { id });
+    public EntityBuilder(I id)
+    {
+        try
+        {
+            entity = (E?)Activator.CreateInstance(typeof(E), new object[] { id });
+        }
+        catch
+        {
+            throw new ArgumentNullException();
+        }
+    }
 
     public readonly NotificationCollector Collector = new();
 
     public E? Build(string objectName)
     {
-        return entity;
-        //entity?.Validate(Collector, objectName);
-        //return Collector.HasErrors ? null : entity;
+        entity?.Validate(Collector, objectName);
+        return Collector.HasErrors ? null : entity;
     }
 }

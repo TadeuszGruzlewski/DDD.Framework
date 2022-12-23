@@ -12,6 +12,11 @@ public class MyEntity : Entity<MyId>
     public int? Value { get; private set; }
 
     public MyEntity(MyId id, int? value = null) : base(id) => Value = value;
+
+    protected override bool LocalValidate(NotificationCollector collector)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 //public class MyEntity<TId> : Entity<TId> where TId : MyId
@@ -34,4 +39,9 @@ public class MyEntity1 : Entity<MyId1>
     public int? Value { get; private set; }
 
     public MyEntity1(MyId1 id, int? value = null) : base(id) => Value = value;
+
+    protected override bool LocalValidate(NotificationCollector collector)
+    {
+        throw new System.NotImplementedException();
+    }
 }

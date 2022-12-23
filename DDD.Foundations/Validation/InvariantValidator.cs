@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
+﻿
 namespace DDD.Foundations;
 
 public record class InvariantValidator(NotificationCollector Collector)
@@ -58,35 +57,19 @@ public record class InvariantValidator(NotificationCollector Collector)
     //    return valid;
     //}
 
-    public bool IsAboveMinimum(Regex regex, string field, string name, decimal minimum)
-    {
-        var valid = regex.IsMatch(field);
-        if (!valid)
-            AddError(InvariantErrorCode.BelowMinimum, name, $"Must be above {minimum}");       
-        return valid;
-    }
-
-    public bool IsBelowMaximum(Regex regex, string field, string name, decimal maximum)
-    {
-        var valid = regex.IsMatch(field);
-        if (!valid)
-            AddError(InvariantErrorCode.AboveMaximum, name, $"Must be below {maximum}");
-        return valid;
-    }
-
-    //public static bool IsValid(ValueObject valueObject, string name)
+    //public bool IsAboveMinimum(decimal field, string name, decimal minimum)
     //{
-    //    var valid = valueObject.IsValid;
+    //    var valid = field > minimum;
     //    if (!valid)
-    //        Errors.Add(new(InvariantErrorCode.ProgrammaticError, $"{name} is invalid", name));
+    //        AddError(InvariantErrorCode.BelowMinimum, name, $"Must be above {minimum}");       
     //    return valid;
     //}
 
-    //public static bool IsValid(Entity entity, string name)
+    //public bool IsBelowMaximum(decimal field, string name, decimal maximum)
     //{
-    //    var valid = entity.IsValid;
+    //    var valid = field < maximum;
     //    if (!valid)
-    //        Errors.Add(new(InvariantErrorCode.ProgrammaticError, $"{name} is invalid", name));
+    //        AddError(InvariantErrorCode.AboveMaximum, name, $"Must be below {maximum}");
     //    return valid;
     //}
 }

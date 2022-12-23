@@ -37,13 +37,13 @@ public record class BaggageAllowanceValidator
         var validator = new LocalValidator(collector);
 
         var valid =
-            validator.IsAllowedNumber(baggage.Accessories, allowance.NumberOfAccessories, nameof(baggage.Accessories)) &
-            validator.IsAllowedNumber(baggage.HandBaggage, allowance.NumberOfHandBaggages, nameof(baggage.HandBaggage)) &
-            validator.IsAllowedNumber(baggage.CheckedBaggage, allowance.NumberOfCheckedBaggages, nameof(baggage.CheckedBaggage)) &
-            validator.IsCabinAllowedWeight(baggage.CabinBaggage, allowance.WeightOfAllCabinBaggage, nameof(baggage.CabinBaggage));
+            validator.IsAllowedNumber(baggage.Accessories, allowance.NumberOfAccessories, "Accessories") &
+            validator.IsAllowedNumber(baggage.HandBaggage, allowance.NumberOfHandBaggages, "Hand Baggage") &
+            validator.IsAllowedNumber(baggage.CheckedBaggage, allowance.NumberOfCheckedBaggages, "Checked Baggage") &
+            validator.IsCabinAllowedWeight(baggage.CabinBaggage, allowance.WeightOfAllCabinBaggage, "Cabin Baggage");
 
         foreach (var item in baggage.CheckedBaggage)
-            valid &= validator.IsCheckedAllowedWeight(item, allowance.WeightOfOneCheckedBaggage, nameof(baggage.CheckedBaggage));
+            valid &= validator.IsCheckedAllowedWeight(item, allowance.WeightOfOneCheckedBaggage, "Checked Baggage");
 
         return valid;
     }

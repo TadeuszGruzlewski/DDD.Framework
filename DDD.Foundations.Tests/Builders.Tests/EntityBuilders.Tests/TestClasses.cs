@@ -9,9 +9,11 @@ public record class MyId(long Code) : EntityId
 
 public class MyEntity<TId> : Entity<TId> where TId : MyId
 {
-    // TODO - constructor should be internal/private
+    // TODO - constructor should be internal
     public MyEntity(MyId id) : base((TId)id)
     { }
+
+    protected override bool LocalValidate(NotificationCollector collector) => true;
 }
 
 public class MyBuilder : EntityBuilder<MyEntity<MyId>, MyId>

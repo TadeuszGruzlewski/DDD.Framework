@@ -5,16 +5,15 @@ namespace EntityBuildersTests;
 
 public class BaseTests
 {
-    //[Test]
-    //public void CreateMyEntityWithNullId_ShouldFail()
-    //{
-    //    //Arrange
-    //    MyId? id = null;
-    //    MyEntity<MyId> entity;
+    [Test]
+    public void BuildMyEntityWithNullId_ShouldFail()
+    {
+        //Arrange
+        MyBuilder b;
 
-    //    //Act and Assert
-    //    Assert.Throws<ArgumentNullException>(() => entity = new(id));
-    //}
+        //Act and Assert
+        Assert.Throws<ArgumentNullException>(() => b = new(null));
+    }
 
     [Test]
     public void BuildMyEntity_CheckIdentity()

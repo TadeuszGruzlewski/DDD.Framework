@@ -11,6 +11,23 @@ public abstract class Entity<TId> where TId : EntityId
         Id = id;
     }
 
+    public bool IsValidated { get; private set; } = false;
+    public bool? IsValid { get; private set; } = null;
+
+    protected abstract bool LocalValidate(NotificationCollector collector);
+
+    public bool Validate(NotificationCollector collector, string objectName)
+    {
+        if (!IsValidated)
+        {
+            collector.ExtendContext(objectName);
+            IsValid = LocalValidate(collector);
+            collector.ReduceContext();
+            IsValidated = true;
+        }
+        return (bool)IsValid!;
+    }
+
     //We follow the Microsoft semantics.
     //Lifted == operator considers two null values equal, 
     //and a null value unequal to any non-null value.
