@@ -11,8 +11,11 @@ public class BaseTests
         //Arrange
         MyBuilder b;
 
-        //Act and Assert
-        Assert.Throws<ArgumentNullException>(() => b = new(null));
+        //Act
+        b = new(null);
+
+        //Assert
+        Assert.IsTrue(b.Collector.HasErrors);
     }
 
     [Test]

@@ -9,14 +9,10 @@ public abstract class EntityBuilder<E, I> : IEntityBuilder<E, I> where E : Entit
     // TODO - CreateInstance for internal constructor of entity
     public EntityBuilder(I id)
     {
-        try
-        {
+        var validator = new InvariantValidator(Collector);
+        var valid = validator.IsNotNullReference(id, "Id");
+        if (valid)
             entity = (E?)Activator.CreateInstance(typeof(E), new object[] { id });
-        }
-        catch
-        {
-            throw new ArgumentNullException();
-        }
     }
 
     public readonly NotificationCollector Collector = new();
