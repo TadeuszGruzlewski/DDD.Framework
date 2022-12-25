@@ -27,10 +27,6 @@ Console.WriteLine("");
 
 
 
-
-
-
-
 //var c = new Country(-5, "");
 //c.Validate();
 //foreach(var e in c.Errors)

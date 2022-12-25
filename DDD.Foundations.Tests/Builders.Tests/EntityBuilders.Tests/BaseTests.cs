@@ -15,7 +15,7 @@ public class BaseTests
         b = new(null);
 
         //Assert
-        Assert.IsTrue(b.Collector.HasErrors);
+        Assert.IsTrue(b.NotificationCollector.HasErrors);
     }
 
     [Test]

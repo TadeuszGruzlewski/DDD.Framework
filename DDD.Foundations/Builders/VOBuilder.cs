@@ -8,11 +8,12 @@ public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject
     public VOBuilder() =>
         valueObject = (VO?)Activator.CreateInstance(typeof(VO), true);
 
-    public readonly NotificationCollector Collector = new();
+    public NotificationCollector NotificationCollector { get; private set; }
 
     public VO? Build(string objectName)
     {
-        valueObject?.Validate(Collector, objectName);
-        return Collector.HasErrors ? null : valueObject;
+        NotificationCollector = new(objectName);
+        valueObject?.Validate(NotificationCollector, objectName);
+        return NotificationCollector.HasErrors ? null : valueObject;
     }
 }

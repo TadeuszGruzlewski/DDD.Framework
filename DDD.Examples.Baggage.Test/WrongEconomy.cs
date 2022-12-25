@@ -12,7 +12,7 @@ public class WrongEconomy
         MyBaggage = B
             .Build(nameof(MyBaggage));
 
-        Assert.IsTrue(B.Collector.HasErrors);
+        Assert.IsTrue(B.NotificationCollector.HasErrors);
     }
 
     [Test]
@@ -29,7 +29,7 @@ public class WrongEconomy
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Red suitcase")
             .Build(nameof(MyBaggage));
 
-        Assert.IsTrue(B.Collector.ErrorsCount == 2);
+        Assert.IsTrue(B.NotificationCollector.ErrorsCount == 2);
     }
 
     [Test]
@@ -46,6 +46,6 @@ public class WrongEconomy
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Red suitcase")
             .Build(nameof(MyBaggage));
 
-        Assert.IsTrue(B.Collector.ErrorsCount == 2);
+        Assert.IsTrue(B.NotificationCollector.ErrorsCount == 2);
     }
 }
