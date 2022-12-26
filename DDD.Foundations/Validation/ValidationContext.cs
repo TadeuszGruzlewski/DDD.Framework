@@ -1,20 +1,25 @@
-﻿namespace DDD.Foundations;
+﻿
+using System.Text.Json.Serialization;
+
+namespace DDD.Foundations;
 
 public class ValidationContext
 {
     public string Name { get; init; }
+    [JsonIgnore]
     public ValidationContext? Parent { get; internal init; } = null;
-
-    public IReadOnlyCollection<ValidationContext> InnerContexts => innerContexts;
-    private readonly List<ValidationContext> innerContexts = new();
+    [JsonIgnore]
+    public int ErrorsCount => innerContexts.Sum(c => c.ErrorsCount) + errors.Count;
 
     public IReadOnlyCollection<InvariantError> Errors => errors;
     private readonly List<InvariantError> errors = new();
 
+    public IReadOnlyCollection<ValidationContext> InnerContexts => innerContexts;
+    private readonly List<ValidationContext> innerContexts = new();
+
     public ValidationContext(string name)
     {
         Name = name;
-        //Parent = null;
     }
 
     public ValidationContext AddInnerContext(string name)
@@ -25,6 +30,4 @@ public class ValidationContext
     }
 
     public void AddError(InvariantError error) => errors.Add(error);
-
-    public int ErrorsCount => innerContexts.Sum(c => c.ErrorsCount) + errors.Count;
 }

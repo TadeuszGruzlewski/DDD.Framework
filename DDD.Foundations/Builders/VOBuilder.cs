@@ -10,6 +10,8 @@ public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject
 
     public NotificationCollector NotificationCollector { get; private set; }
 
+//    public string ErrorsAsString => NotificationCollector.Errors;
+
     public VO? Build(string objectName)
     {
         NotificationCollector = new(objectName);

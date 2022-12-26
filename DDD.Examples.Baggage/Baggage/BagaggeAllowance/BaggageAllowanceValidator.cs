@@ -43,7 +43,7 @@ public record class BaggageAllowanceValidator
             validator.IsCabinAllowedWeight(baggage.CabinBaggage, allowance.WeightOfAllCabinBaggage, "Cabin Baggage");
 
         foreach (var item in baggage.CheckedBaggage)
-            valid &= validator.IsCheckedAllowedWeight(item, allowance.WeightOfOneCheckedBaggage, "Checked Baggage");
+            valid &= validator.IsCheckedAllowedWeight(item, allowance.WeightOfOneCheckedBaggage, item.Description);
 
         return valid;
     }

@@ -1,4 +1,6 @@
-﻿
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace DDD.Foundations;
 
 public record class NotificationCollector
@@ -7,7 +9,7 @@ public record class NotificationCollector
 
     private ValidationContext currentContext;
 
-    public NotificationCollector(string name) => currentContext = (Context = new(name));
+    public NotificationCollector(string name) => currentContext = Context = new(name);
 
     public void ExtendContext(string fieldName) => 
         currentContext = Context.AddInnerContext(fieldName);
@@ -18,10 +20,20 @@ public record class NotificationCollector
     }
 
     public void AddError(InvariantErrorCode error, string fieldName, string? details = null) =>
-        currentContext?.AddError(new InvariantError(error, "", fieldName, details));
+        currentContext?.AddError(new InvariantError(error, fieldName, details));
 
     public bool HasErrors => ErrorsCount > 0;
     public int ErrorsCount => currentContext.ErrorsCount;
+
+    //    public string Errors => "{ " + Context.Name + " }";
+
+    JsonSerializerOptions options = new()
+    {
+
+        ReferenceHandler = ReferenceHandler.IgnoreCycles,
+        WriteIndented = true
+    };
+    public string ErrorsAsJson => JsonSerializer.Serialize(Context, options);
 }
 
 

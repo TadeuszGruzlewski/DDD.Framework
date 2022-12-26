@@ -108,6 +108,8 @@ public class WrongBussines
             .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Another suitcase")
             .Build(nameof(MyBaggage));
 
+        var z = B.NotificationCollector.ErrorsAsJson;
+
         Assert.IsTrue(B.NotificationCollector.HasErrors);
     }
 
