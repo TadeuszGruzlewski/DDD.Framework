@@ -2,7 +2,7 @@
 
 namespace DDD.Examples.Baggage;
 
-public abstract record class BaggageItem(BaggageSize Size, decimal Weight, string Description) : ValueObject
+public abstract record class BaggageItem(BaggageSize Size, decimal Weight, string Name) : ValueObject(Name)
 {
     private record class LocalValidator(NotificationCollector Collector) : InvariantValidator(Collector)
     {
@@ -10,7 +10,7 @@ public abstract record class BaggageItem(BaggageSize Size, decimal Weight, strin
         {
             var valid = baggageItem.IsAllowedSize();
             if (!valid)
-                AddError(InvariantErrorCode.AboveMaximum, baggageItem.Description, $"Baggage size exceeds allowed dimensions {baggageItem.Size}.");
+                AddError(InvariantErrorCode.AboveMaximum, baggageItem.Name!, $"Baggage size exceeds allowed dimensions {baggageItem.Size}.");
             return valid;
         }
     }

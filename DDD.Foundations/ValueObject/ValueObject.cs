@@ -1,7 +1,7 @@
 ﻿
 namespace DDD.Foundations;
 
-public abstract record class ValueObject
+public abstract record class ValueObject(string? Name = default)
 {
     public bool IsValidated { get; private set; } = false;
     public bool? IsValid { get; private set; } = null;

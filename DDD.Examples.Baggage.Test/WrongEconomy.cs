@@ -10,7 +10,7 @@ public class WrongEconomy
         var B = new BaggageBuilder();
 
         MyBaggage = B
-            .Build(nameof(MyBaggage));
+            .Build("Baggage of Tadeusz");
 
         Assert.IsTrue(B.NotificationCollector.HasErrors);
     }
@@ -27,7 +27,7 @@ public class WrongEconomy
             .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Suitcase")
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Black suitcase")
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Red suitcase")
-            .Build(nameof(MyBaggage));
+            .Build("Baggage of Tadeusz");
 
         Assert.IsTrue(B.NotificationCollector.ErrorsCount == 2);
     }
@@ -44,7 +44,7 @@ public class WrongEconomy
             .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Bag")
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Black suitcase")
             .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Red suitcase")
-            .Build(nameof(MyBaggage));
+            .Build("Baggage of Tadeusz");
 
         Assert.IsTrue(B.NotificationCollector.ErrorsCount == 2);
     }

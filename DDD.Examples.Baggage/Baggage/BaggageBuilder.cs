@@ -19,14 +19,14 @@ public class BaggageBuilder : VOBuilder<Baggage>
 
     public BaggageBuilder AddHandBaggage(BaggageSize size, decimal weight, string description)
     {
-        HandBaggage handBaggage = new(size, weight, description);
+        Hand_Baggage handBaggage = new(size, weight, description);
         valueObject!.AddBaggageItem(handBaggage);
         return this;
     }
 
     public BaggageBuilder AddCheckedBaggage(BaggageSize size, decimal weight, string description)
     {
-        CheckedBaggage checkedBaggage = new(size, weight, description);
+        Checked_Baggage checkedBaggage = new(size, weight, description);
         valueObject!.AddBaggageItem(checkedBaggage);
         return this;
     }

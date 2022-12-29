@@ -9,7 +9,7 @@ public record class NotificationCollector
 
     private ValidationContext currentContext;
 
-    public NotificationCollector(string name) => currentContext = Context = new(name);
+    public NotificationCollector(string objectName) => currentContext = Context = new(objectName);
 
     public void ExtendContext(string fieldName) => 
         currentContext = Context.AddInnerContext(fieldName);
@@ -35,24 +35,3 @@ public record class NotificationCollector
     };
     public string ErrorsAsJson => JsonSerializer.Serialize(Context, options);
 }
-
-
-
-//public record class NotificationCollector
-//{
-//    private const string separator = " >>> ";
-
-//    private readonly List<string> context = new();
-//    public string Context => string.Join(separator, context);
-//    public void ExtendContext(string fieldName) => context.Add(fieldName);
-//    public void ReduceContext() => context.RemoveAt(context.Count - 1);
-
-//    public IReadOnlyCollection<InvariantError> Errors => errors;
-//    private readonly List<InvariantError> errors = new();
-
-//    public void AddError(InvariantErrorCode error, string fieldName, string? details = null) =>
-//        errors.Add(new InvariantError(error, Context, fieldName, details));
-
-//    public bool HasErrors => errors.Count > 0;
-//    public int ErrorsCount => errors.Count;
-//}

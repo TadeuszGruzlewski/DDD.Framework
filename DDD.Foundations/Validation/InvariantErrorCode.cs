@@ -2,53 +2,106 @@
 
 public record class InvariantErrorCode : ErrorCode
 {
-    protected InvariantErrorCode(int Code, string Text, string? Details = null) : base(Code, Text) { }
+    protected InvariantErrorCode(string Text) : base(Text) { }
 
     /// <summary>
     /// Programming error (always thrown as exception)
     /// </summary>
-    public static readonly InvariantErrorCode ProgrammaticError = new (1, "Programmatic error");
+    public static readonly InvariantErrorCode ProgrammaticError = new ("Programmatic error");
 
     /// <summary>
     /// Null reference error
     /// </summary>
-    public static readonly InvariantErrorCode NullReference = new(10, "Null reference");
+    public static readonly InvariantErrorCode NullReference = new("Null reference");
     /// <summary>
     /// Null argument error
     /// </summary>
-    public static readonly InvariantErrorCode NullArgument = new(11, "Null argument");
+    public static readonly InvariantErrorCode NullArgument = new("Null argument");
 
     /// <summary>
     /// Value is null, empty, or whitespace
     /// </summary>
-    public static readonly InvariantErrorCode NullOrEmpty = new(20, "Null or empty value");
+    public static readonly InvariantErrorCode NullOrEmpty = new("Null or empty value");
     /// <summary>
     /// Type check error
     /// </summary>
-    public static readonly InvariantErrorCode WrongType = new(21, "Wrong type");
+    public static readonly InvariantErrorCode WrongType = new("Wrong type");
     /// <summary>
     /// Format (regex) validation error
     /// </summary>
-    public static readonly InvariantErrorCode WrongFormat = new(22, "Wrong format");
+    public static readonly InvariantErrorCode WrongFormat = new("Wrong format");
 
     /// <summary>
     /// Value is outside the specified range
     /// </summary>
-    public static readonly InvariantErrorCode OutsideRange = new(30, "Outside range");
+    public static readonly InvariantErrorCode OutsideRange = new("Outside range");
     /// Value is below the specified minimum
     /// </summary>
-    public static readonly InvariantErrorCode BelowMinimum = new(31, "Below minimum");
+    public static readonly InvariantErrorCode BelowMinimum = new("Below minimum");
     /// Value is above the specified maximum
     /// </summary>
-    public static readonly InvariantErrorCode AboveMaximum = new(32, "Above maximum");
+    public static readonly InvariantErrorCode AboveMaximum = new("Above maximum");
 
     /// <summary>
     /// Value does not meet the specified constraints
     /// </summary>
-    public static readonly InvariantErrorCode ConstraintViolation = new(40, "Constraint violation");
+    public static readonly InvariantErrorCode ConstraintViolation = new("Constraint violation");
 
     /// <summary>
     /// Value is conflicting with another value of another parameter
     /// </summary>
-    public static readonly InvariantErrorCode ConflictingValues = new(41, "Conflicting values");
+    public static readonly InvariantErrorCode ConflictingValues = new("Conflicting values");
 }
+
+//public record class InvariantErrorCode : ErrorCode
+//{
+//    protected InvariantErrorCode(int Code, string Text, string? Details = null) : base(Code, Text) { }
+
+//    /// <summary>
+//    /// Programming error (always thrown as exception)
+//    /// </summary>
+//    public static readonly InvariantErrorCode ProgrammaticError = new(1, "Programmatic error");
+
+//    /// <summary>
+//    /// Null reference error
+//    /// </summary>
+//    public static readonly InvariantErrorCode NullReference = new(10, "Null reference");
+//    /// <summary>
+//    /// Null argument error
+//    /// </summary>
+//    public static readonly InvariantErrorCode NullArgument = new(11, "Null argument");
+
+//    /// <summary>
+//    /// Value is null, empty, or whitespace
+//    /// </summary>
+//    public static readonly InvariantErrorCode NullOrEmpty = new(20, "Null or empty value");
+//    /// <summary>
+//    /// Type check error
+//    /// </summary>
+//    public static readonly InvariantErrorCode WrongType = new(21, "Wrong type");
+//    /// <summary>
+//    /// Format (regex) validation error
+//    /// </summary>
+//    public static readonly InvariantErrorCode WrongFormat = new(22, "Wrong format");
+
+//    /// <summary>
+//    /// Value is outside the specified range
+//    /// </summary>
+//    public static readonly InvariantErrorCode OutsideRange = new(30, "Outside range");
+//    /// Value is below the specified minimum
+//    /// </summary>
+//    public static readonly InvariantErrorCode BelowMinimum = new(31, "Below minimum");
+//    /// Value is above the specified maximum
+//    /// </summary>
+//    public static readonly InvariantErrorCode AboveMaximum = new(32, "Above maximum");
+
+//    /// <summary>
+//    /// Value does not meet the specified constraints
+//    /// </summary>
+//    public static readonly InvariantErrorCode ConstraintViolation = new(40, "Constraint violation");
+
+//    /// <summary>
+//    /// Value is conflicting with another value of another parameter
+//    /// </summary>
+//    public static readonly InvariantErrorCode ConflictingValues = new(41, "Conflicting values");
+//}

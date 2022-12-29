@@ -12,9 +12,9 @@ public record class Baggage : ValueObject
     public void AddBaggageItem(BaggageItem bagaggeItem) => baggage.Add(bagaggeItem);
 
     public List<BaggageItem> Accessories => baggage.Where(b => b.GetType() == typeof(Accessory)).ToList();
-    public List<BaggageItem> HandBaggage => baggage.Where(b => b.GetType() == typeof(HandBaggage)).ToList();
-    public List<BaggageItem> CabinBaggage => baggage.Where(b => b.GetType() == typeof(Accessory) | b.GetType() == typeof(HandBaggage)).ToList();
-    public List<BaggageItem> CheckedBaggage => baggage.Where(b => b.GetType() == typeof(CheckedBaggage)).ToList();
+    public List<BaggageItem> HandBaggage => baggage.Where(b => b.GetType() == typeof(Hand_Baggage)).ToList();
+    public List<BaggageItem> CabinBaggage => baggage.Where(b => b.GetType() == typeof(Accessory) | b.GetType() == typeof(Hand_Baggage)).ToList();
+    public List<BaggageItem> CheckedBaggage => baggage.Where(b => b.GetType() == typeof(Checked_Baggage)).ToList();
 
 
     protected override bool LocalValidate(NotificationCollector collector)
