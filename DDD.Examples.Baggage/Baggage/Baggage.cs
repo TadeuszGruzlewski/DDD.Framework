@@ -4,31 +4,73 @@ namespace DDD.Examples.Baggage;
 
 public record class Baggage : ValueObject
 {
-    public BaggageAllowance? Allowance { get; internal set; }
-    private readonly List<BaggageItem> baggage = new();
+    protected record class LocalValidator(NotificationCollector Collector) : InvariantValidator(Collector)
+    {
+        public bool IsAllowedNumber(IReadOnlyCollection<BaggageItem> baggageItems, int allowedNumber, string fieldName)
+        {
+            var valid = baggageItems.Count <= allowedNumber;
+            if (!valid)
+                AddError(InvariantErrorCode.AboveMaximum, fieldName, $"Number of baggage items exceeds the allowed limit of {allowedNumber} items.");
+            return valid;
+        }
+    }
 
     private Baggage() { }
 
-    public void AddBaggageItem(BaggageItem bagaggeItem) => baggage.Add(bagaggeItem);
+    private readonly CabinBaggageList cabinBaggageList = new();
 
-    public List<BaggageItem> Accessories => baggage.Where(b => b.GetType() == typeof(Accessory)).ToList();
-    public List<BaggageItem> HandBaggage => baggage.Where(b => b.GetType() == typeof(Hand_Baggage)).ToList();
-    public List<BaggageItem> CabinBaggage => baggage.Where(b => b.GetType() == typeof(Accessory) | b.GetType() == typeof(Hand_Baggage)).ToList();
-    public List<BaggageItem> CheckedBaggage => baggage.Where(b => b.GetType() == typeof(Checked_Baggage)).ToList();
+    private readonly CheckedBaggageList checkedBaggageList = new();
 
+    private BaggageAllowance? allowance;
+
+    public IReadOnlyCollection<BaggageItem> Accessories => CabinBaggage.Where(b => b.GetType() == typeof(Accessory)).ToList();
+    public IReadOnlyCollection<BaggageItem> HandBaggage => CabinBaggage.Where(b => b.GetType() == typeof(HandBaggage)).ToList();
+    public IReadOnlyCollection<BaggageItem> CabinBaggage => cabinBaggageList.BaggageItems;
+    public IReadOnlyCollection<BaggageItem> CheckedBaggage => checkedBaggageList.BaggageItems;
+
+    public void SetAllowance(BaggageAllowance allowance)
+    {
+        this.allowance = allowance;
+        cabinBaggageList.Allowance = allowance;
+        checkedBaggageList.Allowance = allowance;
+    }
+
+    public void AddAccessory(BaggageSize size, decimal weight, string description)
+    {
+        Accessory accessory = new(size, weight, description);
+        cabinBaggageList.AddBaggageItem(accessory);
+    }
+
+    public void AddHandBaggage(BaggageSize size, decimal weight, string description)
+    {
+        HandBaggage handBaggage = new(size, weight, description);
+        cabinBaggageList.AddBaggageItem(handBaggage);
+    }
+
+    public void AddCheckedBaggage(BaggageSize size, decimal weight, string description)
+    {
+        CheckedBaggage checkedBaggage = new(size, weight, description);
+        checkedBaggageList.AddBaggageItem(checkedBaggage);
+    }
 
     protected override bool LocalValidate(NotificationCollector collector)
     {
-        var result = true;
+        // Programmatic error
+        var validator = new LocalValidator(collector);
+        validator.IsNotNullReference(allowance, nameof(allowance));
+        if (allowance is null)
+            return false;
 
-        foreach (var item in baggage)
-            result &= item.Validate(collector, item.GetType().Name);
+        // Domain invariants
+        // Baggage scope - number of items
+        var valid =
+            validator.IsAllowedNumber(Accessories, allowance.NumberOfAccessories, "Accessories") &
+            validator.IsAllowedNumber(HandBaggage, allowance.NumberOfHandBaggages, "Hand baggage") &
+            validator.IsAllowedNumber(CheckedBaggage, allowance.NumberOfCheckedBaggages, "Checked baggage");
 
-        var validator = new InvariantValidator(collector);
-        validator.IsNotNullReference(Allowance, nameof(Allowance));
-        if (Allowance is not null)
-            result &= BaggageAllowanceValidator.IsBaggageAllowed(collector, this, Allowance);
-
-        return result;
+        // Cabin and Checked baggage subscopes
+        return valid & 
+            cabinBaggageList.Validate(collector, "Cabin baggage") &        
+            checkedBaggageList.Validate(collector, "Checked baggage");       
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace DDD.Examples.Baggage;
 
-public record class Hand_Baggage(BaggageSize Size, decimal Weight, string Name) : BaggageItem(Size, Weight, Name)
+public record class HandBaggage(BaggageSize Size, decimal Weight, string Name) : BaggageItem(Size, Weight, Name)
 {
     public static readonly BaggageSize MaxSize = new(55, 35, 25);
 

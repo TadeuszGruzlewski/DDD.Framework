@@ -16,13 +16,13 @@ public abstract class Entity<TId> where TId : EntityId
 
     protected abstract bool LocalValidate(NotificationCollector collector);
 
-    public bool Validate(NotificationCollector collector, string objectName)
+    public bool Validate(NotificationCollector collector, string scopeName)
     {
         if (!IsValidated)
         {
-            collector.ExtendContext(objectName);
+            collector.EnterSubScope(scopeName);
             IsValid = LocalValidate(collector);
-            collector.ReduceContext();
+            collector.LeaveSubScope();
             IsValidated = true;
         }
         return (bool)IsValid!;

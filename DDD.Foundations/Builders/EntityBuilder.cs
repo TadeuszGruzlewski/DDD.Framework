@@ -8,7 +8,7 @@ public abstract class EntityBuilder<E, I> : IEntityBuilder<E, I> where E : Entit
     // TODO - CreateInstance for internal constructor of entity
     public EntityBuilder(I id)
     {
-        NotificationCollector = new(id is null ? "" : id.ToString());
+        NotificationCollector = new();// new(id is null ? "" : id.ToString());
         var validator = new InvariantValidator(NotificationCollector);
         var valid = validator.IsNotNullReference(id, "Id");
         if (valid)

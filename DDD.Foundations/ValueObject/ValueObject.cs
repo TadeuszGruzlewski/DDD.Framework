@@ -8,13 +8,13 @@ public abstract record class ValueObject(string? Name = default)
 
     protected abstract bool LocalValidate(NotificationCollector collector);
 
-    public bool Validate(NotificationCollector collector, string objectName)
+    public bool Validate(NotificationCollector collector, string scopeName)
     {
         if (!IsValidated)
         {
-            collector.ExtendContext(objectName);
+            collector.EnterSubScope(scopeName);
             IsValid = LocalValidate(collector);
-            collector.ReduceContext();
+            collector.LeaveSubScope();
             IsValidated = true;
         }
         return (bool)IsValid!;

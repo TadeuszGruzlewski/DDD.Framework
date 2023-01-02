@@ -3,35 +3,33 @@ using System.Text.Json.Serialization;
 
 namespace DDD.Foundations;
 
-public record class NotificationCollector
+public class NotificationCollector
 {
-    public ValidationContext Context { get; init; }
+    public ValidationScope? Scope { get; private set; }
 
-    private ValidationContext currentContext;
+    private ValidationScope? currentScope;
 
-    public NotificationCollector(string objectName) => currentContext = Context = new(objectName);
-
-    public void ExtendContext(string fieldName) => 
-        currentContext = Context.AddInnerContext(fieldName);
-    public void ReduceContext()
+    public void EnterSubScope(string scopeName)
     {
-        if (currentContext.Parent is not null)
-            currentContext = currentContext.Parent;
+        if (Scope is null)
+            currentScope = Scope = new (scopeName);
+        else
+            currentScope = currentScope?.AddSubScope(scopeName);
     }
 
+    public void LeaveSubScope() => 
+        currentScope = currentScope?.Parent;
+
     public void AddError(InvariantErrorCode error, string fieldName, string? details = null) =>
-        currentContext?.AddError(new InvariantError(error, fieldName, details));
+        currentScope?.AddError(new InvariantError(error, fieldName, details));
 
     public bool HasErrors => ErrorsCount > 0;
-    public int ErrorsCount => currentContext.ErrorsCount;
-
-    //    public string Errors => "{ " + Context.Name + " }";
+    public int ErrorsCount => Scope?.ErrorsCount ?? 0;
 
     JsonSerializerOptions options = new()
     {
-
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
         WriteIndented = true
     };
-    public string ErrorsAsJson => JsonSerializer.Serialize(Context, options);
+    public string? ErrorsAsJson => JsonSerializer.Serialize(Scope, options);
 }
