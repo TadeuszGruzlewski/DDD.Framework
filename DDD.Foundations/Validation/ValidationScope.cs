@@ -29,5 +29,5 @@ public class ValidationScope
         return scope;
     }
 
-    public void AddError(InvariantError error) => errors.Add(error);
+    public void AddError(string message) => errors.Add(new(message));
 }

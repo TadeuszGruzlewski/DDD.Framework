@@ -10,7 +10,7 @@ public record class Baggage : ValueObject
         {
             var valid = baggageItems.Count <= allowedNumber;
             if (!valid)
-                AddError(InvariantErrorCode.AboveMaximum, fieldName, $"Number of baggage items exceeds the allowed limit of {allowedNumber} items.");
+                AddError($"Number of {fieldName} exceeds the allowed limit of {allowedNumber} items.");
             return valid;
         }
     }
@@ -64,9 +64,9 @@ public record class Baggage : ValueObject
         // Domain invariants
         // Baggage scope - number of items
         var valid =
-            validator.IsAllowedNumber(Accessories, allowance.NumberOfAccessories, "Accessories") &
-            validator.IsAllowedNumber(HandBaggage, allowance.NumberOfHandBaggages, "Hand baggage") &
-            validator.IsAllowedNumber(CheckedBaggage, allowance.NumberOfCheckedBaggages, "Checked baggage");
+            validator.IsAllowedNumber(Accessories, allowance.NumberOfAccessories, "accessories") &
+            validator.IsAllowedNumber(HandBaggage, allowance.NumberOfHandBaggages, "hand baggage") &
+            validator.IsAllowedNumber(CheckedBaggage, allowance.NumberOfCheckedBaggages, "checked baggage");
 
         // Cabin and Checked baggage subscopes
         return valid & 

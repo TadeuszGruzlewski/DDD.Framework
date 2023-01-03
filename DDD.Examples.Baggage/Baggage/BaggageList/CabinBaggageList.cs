@@ -11,7 +11,7 @@ public record class CabinBaggageList : BaggageList
             var totalWeight = baggageItems.Sum(w => w.Weight);
             var valid = totalWeight <= allowedWeight;
             if (!valid)
-                AddError(InvariantErrorCode.AboveMaximum, fieldName, $"Weight of cabin baggage exceeds the allowed limit of {allowedWeight} kg.");
+                AddError($"Weight of cabin baggage exceeds the allowed limit of {allowedWeight} kg.");
             return valid;
         }
     }

@@ -20,8 +20,7 @@ public class NotificationCollector
     public void LeaveSubScope() => 
         currentScope = currentScope?.Parent;
 
-    public void AddError(InvariantErrorCode error, string fieldName, string? details = null) =>
-        currentScope?.AddError(new InvariantError(error, fieldName, details));
+    public void AddError(string message) => currentScope?.AddError(message);
 
     public bool HasErrors => ErrorsCount > 0;
     public int ErrorsCount => Scope?.ErrorsCount ?? 0;
