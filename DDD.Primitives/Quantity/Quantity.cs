@@ -28,7 +28,7 @@ public abstract record class Quantity : Primitive
     public static void TestCompatibility(Quantity? q1, Quantity? q2)
     {
         Debug.Assert(!AnyIsNull(q1, q2));
-        q1.UoM!.TestCompatibilityTo(q2.UoM!);
+        q1!.UoM!.TestCompatibilityTo(q2!.UoM!);
     }
 
     public Quantity Normalize() => Create(GetType(), UoM!.Base, Amount * UoM!.Rate)!;
@@ -40,14 +40,14 @@ public abstract record class Quantity : Primitive
 
     public static Quantity? operator *(decimal d, Quantity? q) => q * d;
     public static Quantity? operator *(Quantity? q, decimal d) =>
-        IsNull(q) ? null : Create(q.GetType(), q.UoM!, q.Amount * d)!;
+        IsNull(q) ? null : Create(q!.GetType(), q.UoM!, q.Amount * d)!;
     public static Quantity? operator /(Quantity? q, decimal d) =>
-        IsNull(q) ? null : Create(q.GetType(), q.UoM!, q.Amount / d)!;
+        IsNull(q) ? null : Create(q!.GetType(), q.UoM!, q.Amount / d)!;
     public static decimal? operator /(Quantity? q1, Quantity? q2)
     {
         if (AnyIsNull(q1, q2)) return null;
         TestCompatibility(q1, q2);
-        return q1.GetRateTo(q2);
+        return q1!.GetRateTo(q2!);
     }
 
     public static bool? operator <(Quantity? q1, Quantity? q2) => Less(q1, q2, false);
@@ -58,8 +58,8 @@ public abstract record class Quantity : Primitive
     {
         if (AnyIsNull(q1, q2)) return null;
         TestCompatibility(q1, q2);
-        if (q1.IsZero) return orEq ? 0 <= q2.Amount : 0 < q2.Amount;
-        if (q2.IsZero) return orEq ? q1.Amount <= 0 : q1.Amount < 0;
+        if (q1!.IsZero) return orEq ? 0 <= q2!.Amount : 0 < q2!.Amount;
+        if (q2!.IsZero) return orEq ? q1.Amount <= 0 : q1.Amount < 0;
         return orEq ? 1 <= q1.GetRateTo(q2) : 1 < q1.GetRateTo(q2); // TODO epsilon!
     }
 
@@ -69,8 +69,8 @@ public abstract record class Quantity : Primitive
     {
         if (AnyIsNull(q1, q2)) return null;
         TestCompatibility(q1, q2);
-        if (q1.IsZero) return q2;
-        if (q2.IsZero) return q1;
+        if (q1!.IsZero) return q2;
+        if (q2!.IsZero) return q1;
         return Create(q1.GetType(), q1.UoM!, q1.Amount * (1 + sign * q2.GetRateTo(q1)))!;
 //        return q1 with { UoM = q1.UoM, Amount = q1.Amount * (1 + sign * q2.GetRateTo(q1)) }; // for performance benchmark
     }  

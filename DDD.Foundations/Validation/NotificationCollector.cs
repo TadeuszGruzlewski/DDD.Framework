@@ -5,9 +5,9 @@ namespace DDD.Foundations;
 
 public class NotificationCollector
 {
-    public ValidationScope? Scope { get; private set; }
+    public InvariantScope? Scope { get; private set; }
 
-    private ValidationScope? currentScope;
+    private InvariantScope? currentScope;
 
     public void EnterSubScope(string scopeName)
     {
