@@ -8,18 +8,16 @@ public abstract class EntityBuilder<E, I> : IEntityBuilder<E, I> where E : Entit
     // TODO - CreateInstance for internal constructor of entity
     public EntityBuilder(I id)
     {
-        NotificationCollector = new();// new(id is null ? "" : id.ToString());
-        var validator = new InvariantValidator(NotificationCollector);
-        var valid = validator.IsNotNullReference(id, "Id");
-        if (valid)
-            entity = (E?)Activator.CreateInstance(typeof(E), new object[] { id! });
+        if (id is null)
+            throw new ArgumentNullException(nameof(id));
+        entity = (E?)Activator.CreateInstance(typeof(E), new object[] { id! });
     }
 
-    public NotificationCollector NotificationCollector { get; private set; }
+    public NotificationCollector NotificationCollector { get; } = new();
 
-    public E? Build(string objectName)
+    public E? Build()
     {
-        entity?.Validate(NotificationCollector, objectName);
+        entity?.Validate(NotificationCollector, entity.Id.ToString());
         return NotificationCollector.HasErrors ? null : entity;
     }
 }

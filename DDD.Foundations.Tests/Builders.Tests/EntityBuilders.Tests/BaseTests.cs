@@ -1,4 +1,6 @@
 ﻿using System;
+using DDD.Foundations;
+using EntityTests;
 using NUnit.Framework;
 
 namespace EntityBuildersTests;
@@ -9,13 +11,11 @@ public class BaseTests
     public void BuildMyEntityWithNullId_ShouldFail()
     {
         //Arrange
+        MyEntity entity;
         MyBuilder b;
 
-        //Act
-        b = new(null);
-
-        //Assert
-        Assert.IsTrue(b.NotificationCollector.HasErrors);
+        //Act and Assert
+        Assert.Throws<ArgumentNullException>(() => entity = new(null));
     }
 
     [Test]
@@ -29,7 +29,7 @@ public class BaseTests
         //Act
         id = new(10);
         b = new(id);
-        myEntity = b.Build(nameof(myEntity));
+        myEntity = b.Build();
 
         //Assert
         Assert.IsTrue(myEntity?.Id == id);
