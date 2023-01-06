@@ -5,7 +5,9 @@ public abstract class EntityBuilder<E, I> : IEntityBuilder<E, I> where E : Entit
 {
     protected readonly E? entity;
 
-    // TODO - CreateInstance for internal constructor of entity
+    // TODO - CreateInstance for internal constructor of Entity
+    // At this moment the constructor is protected, which allows
+    // instantiation outside the builder
     public EntityBuilder(I id)
     {
         if (id is null)

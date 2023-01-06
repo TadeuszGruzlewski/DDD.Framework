@@ -9,6 +9,8 @@ abstract public record class BaggageList : ValueObject
     public IReadOnlyCollection<BaggageItem> BaggageItems => baggageItems;
     protected readonly List<BaggageItem> baggageItems = new();
 
+    public int NumberOfItems => baggageItems.Count;
+
     public void AddBaggageItem(BaggageItem bagaggeItem) => baggageItems.Add(bagaggeItem);
 
     protected override bool LocalValidate(NotificationCollector collector)

@@ -17,60 +17,60 @@ public record class Baggage : ValueObject
 
     private Baggage() { }
 
-    private readonly CabinBaggageList cabinBaggageList = new();
+    private readonly CabinBaggageList CabinBaggageList = new();
 
-    private readonly CheckedBaggageList checkedBaggageList = new();
+    private readonly CheckedBaggageList CheckedBaggageList = new();
 
-    private BaggageAllowance? allowance;
+    private BaggageAllowance? Allowance;
 
-    public IReadOnlyCollection<BaggageItem> Accessories => CabinBaggage.Where(b => b.GetType() == typeof(Accessory)).ToList();
-    public IReadOnlyCollection<BaggageItem> HandBaggage => CabinBaggage.Where(b => b.GetType() == typeof(HandBaggage)).ToList();
-    public IReadOnlyCollection<BaggageItem> CabinBaggage => cabinBaggageList.BaggageItems;
-    public IReadOnlyCollection<BaggageItem> CheckedBaggage => checkedBaggageList.BaggageItems;
+    public IReadOnlyCollection<BaggageItem> Accessories => CabinBaggageList.Accessories;
+    public IReadOnlyCollection<BaggageItem> HandBaggage => CabinBaggageList.HandBaggage;
+    public IReadOnlyCollection<BaggageItem> CabinBaggage => CabinBaggageList.BaggageItems;
+    public IReadOnlyCollection<BaggageItem> CheckedBaggage => CheckedBaggageList.BaggageItems;
 
     public void SetAllowance(BaggageAllowance allowance)
     {
-        this.allowance = allowance;
-        cabinBaggageList.Allowance = allowance;
-        checkedBaggageList.Allowance = allowance;
+        Allowance = allowance;
+        CabinBaggageList.Allowance = allowance;
+        CheckedBaggageList.Allowance = allowance;
     }
 
     public void AddAccessory(BaggageSize size, decimal weight, string description)
     {
         Accessory accessory = new(size, weight, description);
-        cabinBaggageList.AddBaggageItem(accessory);
+        CabinBaggageList.AddBaggageItem(accessory);
     }
 
     public void AddHandBaggage(BaggageSize size, decimal weight, string description)
     {
         HandBaggage handBaggage = new(size, weight, description);
-        cabinBaggageList.AddBaggageItem(handBaggage);
+        CabinBaggageList.AddBaggageItem(handBaggage);
     }
 
     public void AddCheckedBaggage(BaggageSize size, decimal weight, string description)
     {
         CheckedBaggage checkedBaggage = new(size, weight, description);
-        checkedBaggageList.AddBaggageItem(checkedBaggage);
+        CheckedBaggageList.AddBaggageItem(checkedBaggage);
     }
 
     protected override bool LocalValidate(NotificationCollector collector)
     {
         // Programmatic error
         var validator = new LocalValidator(collector);
-        validator.IsNotNullReference(allowance, nameof(allowance));
-        if (allowance is null)
+        validator.IsNotNullReference(Allowance, nameof(Allowance));
+        if (Allowance is null)
             return false;
 
         // Domain invariants
         // Baggage scope - number of items
         var valid =
-            validator.IsAllowedNumber(Accessories, allowance.NumberOfAccessories, "accessories") &
-            validator.IsAllowedNumber(HandBaggage, allowance.NumberOfHandBaggages, "hand baggage") &
-            validator.IsAllowedNumber(CheckedBaggage, allowance.NumberOfCheckedBaggages, "checked baggage");
+            validator.IsAllowedNumber(Accessories, Allowance.NumberOfAccessories, "accessories") &
+            validator.IsAllowedNumber(HandBaggage, Allowance.NumberOfHandBaggages, "hand baggage") &
+            validator.IsAllowedNumber(CheckedBaggage, Allowance.NumberOfCheckedBaggages, "checked baggage");
 
         // Cabin and Checked baggage subscopes
         return valid & 
-            cabinBaggageList.Validate(collector, "Cabin baggage") &        
-            checkedBaggageList.Validate(collector, "Checked baggage");       
+            CabinBaggageList.Validate(collector, "Cabin baggage") &        
+            CheckedBaggageList.Validate(collector, "Checked baggage");       
     }
 }
