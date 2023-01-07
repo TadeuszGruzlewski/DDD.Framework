@@ -4,10 +4,9 @@ namespace DDD.Examples.Baggage;
 
 public class BaggageBuilder : VOBuilder<Baggage>
 {
-    public BaggageBuilder SetAllowance(BaggageAllowance baggageAllowance)
+    public BaggageBuilder(BaggageAllowance baggageAllowance)
     {
         valueObject!.SetAllowance(baggageAllowance);
-        return this;
     }
 
     public BaggageBuilder AddAccessory(BaggageSize size, decimal weight, string description)
