@@ -3,10 +3,7 @@ namespace DDD.Foundations;
 
 public record class InvariantValidator(NotificationCollector Collector)
 {
-    //protected void AddError(InvariantErrorCode code, string name, string details) =>
-    //    Collector.AddError(code, name, details);
-
-    protected void AddError(string message) => Collector.AddError(new(message));
+    protected void AddError(string message) => Collector.AddError(message);
 
     //public bool IsNotNullArgument(object? obj, string name)
     //{
@@ -16,14 +13,14 @@ public record class InvariantValidator(NotificationCollector Collector)
     //    return valid;
     //}
 
-    public bool IsNotNullReference(object? obj, string name)
-    {
-        var valid = obj is not null;
-        if (!valid)
-            AddError($"{name} must not be null");
-        //            AddError(InvariantErrorCode.NullReference, name);
-        return valid;
-    }
+    //public bool IsNotNullReference(object? obj, string name)
+    //{
+    //    var valid = obj is not null;
+    //    if (!valid)
+    //        AddError($"{name} must not be null");
+    //    AddError(InvariantErrorCode.NullReference, name);
+    //    return valid;
+    //}
 
     //public bool IsNotNullOrEmpty(string field, string name)
     //{
@@ -64,7 +61,7 @@ public record class InvariantValidator(NotificationCollector Collector)
     //{
     //    var valid = field > minimum;
     //    if (!valid)
-    //        AddError(InvariantErrorCode.BelowMinimum, name, $"Must be above {minimum}");       
+    //        AddError(InvariantErrorCode.BelowMinimum, name, $"Must be above {minimum}");
     //    return valid;
     //}
 

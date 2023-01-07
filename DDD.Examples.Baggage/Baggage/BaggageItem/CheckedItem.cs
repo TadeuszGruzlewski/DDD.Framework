@@ -12,7 +12,7 @@ public record class CheckedItem(BaggageSize Size, decimal Weight, string Name, B
             var allowedSize = Allowance.CheckedItemSize;
             var valid = baggageItem.Size <= allowedSize;
             if (!valid)
-                AddError($"Weight of {baggageItem.Name} exceeds the allowed limit of {allowedSize}.");
+                AddError($"Sum of dimensions exceeds the allowed limit of {allowedSize} cm.");
             return valid;
         }
         public bool IsAllowedWeight(BaggageItem baggageItem)
@@ -20,7 +20,7 @@ public record class CheckedItem(BaggageSize Size, decimal Weight, string Name, B
             var allowedWeight = Allowance.WeightOfOneCheckedBaggage;
             var valid = baggageItem.Weight <= allowedWeight;
             if (!valid)
-                AddError($"Weight of {baggageItem.Name} exceeds the allowed limit of {allowedWeight} kg.");
+                AddError($"Weight exceeds the allowed limit of {allowedWeight} kg.");
             return valid;
         }
     }

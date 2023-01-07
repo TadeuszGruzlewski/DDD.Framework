@@ -11,7 +11,7 @@ public record class AccessoryItem(BaggageSize Size, decimal Weight, string Descr
         {
             var valid = baggageItem.Size <= Allowance.AccessoryItemSize;
             if (!valid)
-                AddError($"{baggageItem.Name} exceeds allowed {Allowance.AccessoryItemSize}.");
+                AddError($"Size exceeds allowed {Allowance.AccessoryItemSize}.");
             return valid;
         }
     }

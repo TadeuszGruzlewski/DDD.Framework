@@ -1,3 +1,3 @@
-﻿namespace DDD.Foundations;
+﻿//namespace DDD.Foundations;
 
-public record class InvariantError(string Message);
+//public record class InvariantError(string Message);

@@ -11,8 +11,8 @@ public class InvariantScope
     [JsonIgnore]
     public int ErrorsCount => subScopes.Sum(c => c.ErrorsCount) + errors.Count;
 
-    public IReadOnlyCollection<InvariantError> Errors => errors;
-    private readonly List<InvariantError> errors = new();
+    public IReadOnlyCollection<string> Errors => errors;
+    private readonly List<string> errors = new();
 
     public IReadOnlyCollection<InvariantScope> SubScopes => subScopes;
     private readonly List<InvariantScope> subScopes = new();
@@ -29,5 +29,5 @@ public class InvariantScope
         return scope;
     }
 
-    public void AddError(string message) => errors.Add(new(message));
+    public void AddError(string message) => errors.Add(message);
 }

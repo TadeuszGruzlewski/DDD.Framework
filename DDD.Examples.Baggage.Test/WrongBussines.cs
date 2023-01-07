@@ -70,7 +70,7 @@ public class WrongBussines
     }
 
     [Test]
-    public void ManyErrors()
+    public void AllPossibleErrors()
     {
         var B = new BaggageBuilder(new BusinessBaggageAllowance());
 
@@ -82,24 +82,6 @@ public class WrongBussines
             .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Small suitcase")
             .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Big suitcase")
             .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Another suitcase")
-            .Build("Baggage");
-
-        Assert.That(B.NotificationCollector.HasErrors);
-    }
-
-    [Test]
-    public void FewErrors()
-    {
-        var B = new BaggageBuilder(new BusinessBaggageAllowance());
-
-        //B.AddAccessory(new BaggageSize(80, 10, 10), 50, "Laptop")
-            //.AddAccessory(new BaggageSize(80, 10, 10), 50, "Camera")
-            //.AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Small suitcase")
-            //.AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Bag")
-            //.AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Another bag")
-            B.AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Small suitcase")
-            //.AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Big suitcase")
-            //.AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Another suitcase")
             .Build("Baggage");
 
         Assert.That(B.NotificationCollector.HasErrors);
