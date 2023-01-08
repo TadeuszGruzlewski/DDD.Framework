@@ -11,7 +11,7 @@ internal record class HandBaggage(BaggageAllowance Allowance) : ValueObject
             var allowedNumber = Allowance.NumberOfCheckedBaggages;
             var valid = numberOfItems <= allowedNumber;
             if (!valid)
-                AddError($"Number of checked items exceeds the allowed limit of {allowedNumber}.");
+                AddError($"Number of {numberOfItems} checked items exceeds the allowed limit of {allowedNumber}.");
             return valid;
         }
     }

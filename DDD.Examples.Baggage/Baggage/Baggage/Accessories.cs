@@ -11,7 +11,7 @@ internal record class Accessories(BaggageAllowance Allowance) : ValueObject
             var allowedNumber = Allowance.NumberOfAccessories;
             var valid = numberOfItems <= allowedNumber;
             if (!valid)
-                AddError($"Number of items exceeds the allowed limit of {allowedNumber}.");
+                AddError($"Number of {numberOfItems} items exceeds the allowed limit of {allowedNumber}.");
             return valid;
         }
     }

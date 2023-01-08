@@ -11,7 +11,7 @@ internal record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
             var allowedWeight = Allowance!.WeightOfAllCabinBaggage;
             var valid = weight <= allowedWeight;
             if (!valid)
-                AddError($"Total weight exceeds the allowed limit of {allowedWeight} kg.");
+                AddError($"Total weight {weight} kg exceeds the allowed limit of {allowedWeight} kg.");
             return valid;
         }
     }

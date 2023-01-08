@@ -20,7 +20,7 @@ public record class CheckedItem(BaggageSize Size, decimal Weight, string Name, B
             var allowedWeight = Allowance.WeightOfOneCheckedBaggage;
             var valid = baggageItem.Weight <= allowedWeight;
             if (!valid)
-                AddError($"Weight exceeds the allowed limit of {allowedWeight} kg.");
+                AddError($"Weight {baggageItem.Weight} kg exceeds the allowed limit of {allowedWeight} kg.");
             return valid;
         }
     }
