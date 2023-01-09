@@ -4,7 +4,8 @@ namespace DDD.Examples.Baggage;
 
 public record class Baggage : ValueObject
 {
-    private Baggage() { }
+    // Internal construct so Baggage can be created by the BaggageBuilder only
+    internal Baggage() { }
 
     private CabinBaggage? CabinBaggage;
     private CheckedBaggage? CheckedBaggage;

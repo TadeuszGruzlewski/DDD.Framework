@@ -9,15 +9,15 @@ public class NotificationCollector
 
     private InvariantScope? currentScope;
 
-    public void EnterSubScope(string scopeName)
+    public void EnterEmbeddedScope(string scopeName)
     {
         if (Scope is null)
             currentScope = Scope = new (scopeName);
         else
-            currentScope = currentScope?.AddSubScope(scopeName);
+            currentScope = currentScope?.AddEmbeddedScope(scopeName);
     }
 
-    public void LeaveSubScope() => 
+    public void ExitEmbeddedScope() => 
         currentScope = currentScope?.Parent;
 
     public void AddError(string message) => currentScope?.AddError(message);

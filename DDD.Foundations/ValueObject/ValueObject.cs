@@ -12,9 +12,9 @@ public abstract record class ValueObject(string? Name = default)
     {
         if (!IsValidated)
         {
-            collector.EnterSubScope(scopeName);
+            collector.EnterEmbeddedScope(scopeName);
             IsValid = LocalValidate(collector);
-            collector.LeaveSubScope();
+            collector.ExitEmbeddedScope();
             IsValidated = true;
         }
         return (bool)IsValid!;

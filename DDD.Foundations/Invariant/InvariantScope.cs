@@ -9,23 +9,23 @@ public class InvariantScope
     [JsonIgnore]
     public InvariantScope? Parent { get; internal init; } = null;
     [JsonIgnore]
-    public int ErrorsCount => subScopes.Sum(c => c.ErrorsCount) + errors.Count;
+    public int ErrorsCount => embeddedScopes.Sum(c => c.ErrorsCount) + errors.Count;
 
     public IReadOnlyCollection<string> Errors => errors;
     private readonly List<string> errors = new();
 
-    public IReadOnlyCollection<InvariantScope> SubScopes => subScopes;
-    private readonly List<InvariantScope> subScopes = new();
+    public IReadOnlyCollection<InvariantScope> EmbeddedScopes => embeddedScopes;
+    private readonly List<InvariantScope> embeddedScopes = new();
 
     public InvariantScope(string name)
     {
         Name = name;
     }
 
-    public InvariantScope AddSubScope(string name)
+    public InvariantScope AddEmbeddedScope(string name)
     {
         var scope = new InvariantScope(name) { Parent = this };
-        subScopes.Add(scope);
+        embeddedScopes.Add(scope);
         return scope;
     }
 
