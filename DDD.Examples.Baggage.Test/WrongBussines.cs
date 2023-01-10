@@ -14,7 +14,7 @@ public class WrongBussines
     {
         var B = new BaggageBuilder(new BusinessBaggageAllowance());
 
-        B.AddAccessory(new BaggageSize(10, 10, 100), 50, "Laptop")
+        B.AddAccessory(new BaggageSize(10, 10, 100), new Weight(50), "Laptop")
             .Build("Baggage");
 
         Assert.That(B.NotificationCollector.ErrorsCount == 2);
@@ -25,8 +25,8 @@ public class WrongBussines
     {
         var B = new BaggageBuilder(new BusinessBaggageAllowance());
 
-        B.AddAccessory(new BaggageSize(10, 10, 10), 5, "Laptop")
-            .AddAccessory(new BaggageSize(10, 10, 10), 5, "Camera")
+        B.AddAccessory(new BaggageSize(10, 10, 10), new Weight(5), "Laptop")
+            .AddAccessory(new BaggageSize(10, 10, 10), new Weight(5), "Camera")
             .Build("Baggage");
 
         Assert.That(B.NotificationCollector.HasErrors);
@@ -37,9 +37,9 @@ public class WrongBussines
     {
         var B = new BaggageBuilder(new BusinessBaggageAllowance());
 
-        B.AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Small suitcase")
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Bag")
-            .AddHandBaggage(new BaggageSize(30, 20, 10), 5, "Another bag")
+        B.AddHandBaggage(new BaggageSize(30, 20, 10), new Weight(5), "Small suitcase")
+            .AddHandBaggage(new BaggageSize(30, 20, 10), new Weight(5), "Bag")
+            .AddHandBaggage(new BaggageSize(30, 20, 10), new Weight(5), "Another bag")
             .Build("Baggage");
 
         Assert.That(B.NotificationCollector.HasErrors);
@@ -50,7 +50,7 @@ public class WrongBussines
     {
         var B = new BaggageBuilder(new BusinessBaggageAllowance());
 
-        B.AddCheckedBaggage(new BaggageSize(10, 100, 100), 50, "Suitcase")
+        B.AddCheckedBaggage(new BaggageSize(10, 100, 100), new Weight(50), "Suitcase")
             .Build("Baggage");
 
         Assert.That(B.NotificationCollector.ErrorsCount == 2);
@@ -61,9 +61,9 @@ public class WrongBussines
     {
         var B = new BaggageBuilder(new BusinessBaggageAllowance());
 
-        B.AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Small suitcase")
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Big suitcase")
-            .AddCheckedBaggage(new BaggageSize(10, 10, 10), 5, "Another suitcase")
+        B.AddCheckedBaggage(new BaggageSize(10, 10, 10), new Weight(5), "Small suitcase")
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), new Weight(5), "Big suitcase")
+            .AddCheckedBaggage(new BaggageSize(10, 10, 10), new Weight(5), "Another suitcase")
             .Build("Baggage");
 
         Assert.That(B.NotificationCollector.HasErrors);
@@ -74,14 +74,14 @@ public class WrongBussines
     {
         var B = new BaggageBuilder(new BusinessBaggageAllowance());
 
-        B.AddAccessory(new BaggageSize(80, 10, 10), 50, "Laptop")
-            .AddAccessory(new BaggageSize(80, 10, 10), 50, "Camera")
-            .AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Small suitcase")
-            .AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Bag")
-            .AddHandBaggage(new BaggageSize(30, 20, 100), 50, "Another bag")
-            .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Small suitcase")
-            .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Big suitcase")
-            .AddCheckedBaggage(new BaggageSize(100, 100, 10), 50, "Another suitcase")
+        B.AddAccessory(new BaggageSize(80, 10, 10), new Weight(50), "Laptop")
+            .AddAccessory(new BaggageSize(80, 10, 10), new Weight(50), "Camera")
+            .AddHandBaggage(new BaggageSize(30, 20, 100), new Weight(50), "Small suitcase")
+            .AddHandBaggage(new BaggageSize(30, 20, 100), new Weight(50), "Bag")
+            .AddHandBaggage(new BaggageSize(30, 20, 100), new Weight(50), "Another bag")
+            .AddCheckedBaggage(new BaggageSize(100, 100, 10), new Weight(50), "Small suitcase")
+            .AddCheckedBaggage(new BaggageSize(100, 100, 10), new Weight(50), "Big suitcase")
+            .AddCheckedBaggage(new BaggageSize(100, 100, 10), new Weight(50), "Another suitcase")
             .Build("Baggage");
 
         Assert.That(B.NotificationCollector.HasErrors);

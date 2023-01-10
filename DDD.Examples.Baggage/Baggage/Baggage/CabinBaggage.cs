@@ -6,7 +6,7 @@ internal record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
 {
     protected record class Validator(NotificationCollector Collector, BaggageAllowance Allowance) : InvariantValidator(Collector)
     {
-        public bool IsAllowedWeight(decimal weight)
+        public bool IsAllowedWeight(Weight weight)
         {
             var allowedWeight = Allowance!.WeightOfAllCabinBaggage;
             var valid = weight <= allowedWeight;
@@ -20,9 +20,9 @@ internal record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
 
     private readonly HandBaggage HandBaggage = new(Allowance);
 
-    public void AddAccessory(BaggageSize size, decimal weight, string description) =>
+    public void AddAccessory(BaggageSize size, Weight weight, string description) =>
         Accessories.AddAccessory(size, weight, description);
-    public void AddHandBaggage(BaggageSize size, decimal weight, string description) =>
+    public void AddHandBaggage(BaggageSize size, Weight weight, string description) =>
         HandBaggage.AddHandBaggage(size, weight, description);
 
     protected override bool LocalValidate(NotificationCollector collector)

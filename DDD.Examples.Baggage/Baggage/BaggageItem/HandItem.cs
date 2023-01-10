@@ -3,7 +3,7 @@ using DDD.Foundations;
 
 namespace DDD.Examples.Baggage;
 
-public record class HandItem(BaggageSize Size, decimal Weight, string Name, BaggageAllowance Allowance) : BaggageItem(Size, Weight, Name, Allowance)
+public record class HandItem(BaggageSize Size, Weight Weight, string Name, BaggageAllowance Allowance) : BaggageItem(Size, Weight, Name, Allowance)
 {
     private record class Validator(NotificationCollector Collector, BaggageAllowance Allowance) : InvariantValidator(Collector)
     {

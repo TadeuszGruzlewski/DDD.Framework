@@ -9,19 +9,19 @@ public class BaggageBuilder : VOBuilder<Baggage>
         valueObject!.SetAllowance(baggageAllowance);
     }
 
-    public BaggageBuilder AddAccessory(BaggageSize size, decimal weight, string description)
+    public BaggageBuilder AddAccessory(BaggageSize size, Weight weight, string description)
     {
         valueObject!.AddAccessory(size, weight, description);
         return this;
     }
 
-    public BaggageBuilder AddHandBaggage(BaggageSize size, decimal weight, string description)
+    public BaggageBuilder AddHandBaggage(BaggageSize size, Weight weight, string description)
     {
         valueObject!.AddHandBaggage(size, weight, description);
         return this;
     }
 
-    public BaggageBuilder AddCheckedBaggage(BaggageSize size, decimal weight, string description)
+    public BaggageBuilder AddCheckedBaggage(BaggageSize size, Weight weight, string description)
     {
         valueObject!.AddCheckedBaggage(size, weight, description);
         return this;

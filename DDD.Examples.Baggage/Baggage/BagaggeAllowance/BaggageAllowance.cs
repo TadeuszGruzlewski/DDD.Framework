@@ -13,6 +13,6 @@ public abstract record class BaggageAllowance
     public abstract int NumberOfHandBaggages { get; }
     public abstract int NumberOfCheckedBaggages { get; }
 
-    public abstract decimal WeightOfAllCabinBaggage { get; }
-    public abstract decimal WeightOfOneCheckedBaggage { get; }
+    public abstract Weight WeightOfAllCabinBaggage { get; }
+    public abstract Weight WeightOfOneCheckedBaggage { get; }
 }

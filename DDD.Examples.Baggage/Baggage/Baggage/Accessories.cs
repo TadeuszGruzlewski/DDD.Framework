@@ -19,11 +19,11 @@ internal record class Accessories(BaggageAllowance Allowance) : ValueObject
     public IReadOnlyCollection<AccessoryItem> BaggageItems => baggageItems;
     protected readonly List<AccessoryItem> baggageItems = new();
 
-    public decimal Weight => baggageItems.Sum(i => i.Weight);
+    public Weight Weight => new(baggageItems.Sum(i => i.Weight.Value));
 
     public int NumberOfItems => baggageItems.Count;
 
-    public void AddAccessory(BaggageSize size, decimal weight, string description)
+    public void AddAccessory(BaggageSize size, Weight weight, string description)
     {
         AccessoryItem accessoryItem = new(size, weight, description, Allowance);
         baggageItems.Add(accessoryItem);
