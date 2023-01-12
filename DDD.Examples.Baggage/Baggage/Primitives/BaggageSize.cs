@@ -17,7 +17,7 @@ public record class BaggageSize(int Length, int Width, int Height) : Primitive
     public static bool operator >=(BaggageSize s, decimal sum) => !(s <= sum);
 
     public override bool IsValid()
-        {
+    {
         bool valid = 0 <= Length & 0 <= Width & 0 <= Height;
         if (!valid)
             ErrorMsg = $"All dimensions of {GetType().Name} must not be negative.";

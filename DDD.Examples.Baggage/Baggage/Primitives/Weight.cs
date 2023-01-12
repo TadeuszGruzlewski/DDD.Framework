@@ -1,6 +1,4 @@
 ﻿using DDD.Foundations;
-using DDD.Primitives.Dimensions;
-using DDD.Primitives.Measures;
 
 namespace DDD.Examples.Baggage;
 

@@ -2,7 +2,7 @@
 
 namespace DDD.Examples.Baggage;
 
-internal record class Accessories(BaggageAllowance Allowance) : ValueObject
+public record class Accessories(BaggageAllowance Allowance) : ValueObject
 {
     protected record class Validator(NotificationCollector Collector, BaggageAllowance Allowance) : InvariantValidator(Collector)
     {

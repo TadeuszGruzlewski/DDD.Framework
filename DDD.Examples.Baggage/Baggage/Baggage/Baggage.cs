@@ -7,8 +7,8 @@ public record class Baggage : ValueObject
     // Internal construct so Baggage can be created by the BaggageBuilder only
     internal Baggage() { }
 
-    private CabinBaggage? CabinBaggage;
-    private CheckedBaggage? CheckedBaggage;
+    public CabinBaggage? CabinBaggage { get; private set; }
+    public CheckedBaggage? CheckedBaggage { get; private set; }
 
     internal void SetAllowance(BaggageAllowance allowance)
     {
@@ -18,11 +18,11 @@ public record class Baggage : ValueObject
         CheckedBaggage = new(allowance);
     }
 
-    public void AddAccessory(BaggageSize size, Weight weight, string description) =>
+    internal void AddAccessory(BaggageSize size, Weight weight, string description) =>
         CabinBaggage!.AddAccessory(size, weight, description);
-    public void AddHandBaggage(BaggageSize size, Weight weight, string description) =>
+    internal void AddHandBaggage(BaggageSize size, Weight weight, string description) =>
         CabinBaggage!.AddHandBaggage(size, weight, description);
-    public void AddCheckedBaggage(BaggageSize size, Weight weight, string description) =>
+    internal void AddCheckedBaggage(BaggageSize size, Weight weight, string description) =>
         CheckedBaggage!.AddCheckedBaggage(size, weight, description);
 
     protected override bool LocalValidate(NotificationCollector collector) =>

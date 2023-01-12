@@ -4,6 +4,8 @@ namespace DDD.Examples.Baggage;
 
 public class BaggageBuilder : VOBuilder<Baggage>
 {
+    // valueObject is created in the base VOBuilder
+    // its type is Baggage
     public BaggageBuilder(BaggageAllowance baggageAllowance)
     {
         valueObject!.SetAllowance(baggageAllowance);

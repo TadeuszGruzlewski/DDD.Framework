@@ -2,7 +2,7 @@
 
 namespace DDD.Examples.Baggage;
 
-internal record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
+public record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
 {
     protected record class Validator(NotificationCollector Collector, BaggageAllowance Allowance) : InvariantValidator(Collector)
     {
@@ -16,9 +16,9 @@ internal record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
         }
     }
 
-    private readonly Accessories Accessories = new(Allowance);
+    public readonly Accessories Accessories = new(Allowance);
 
-    private readonly HandBaggage HandBaggage = new(Allowance);
+    public readonly HandBaggage HandBaggage = new(Allowance);
 
     public void AddAccessory(BaggageSize size, Weight weight, string description) =>
         Accessories.AddAccessory(size, weight, description);
