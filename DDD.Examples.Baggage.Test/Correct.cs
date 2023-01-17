@@ -15,8 +15,6 @@ public class Correct
             .AddCheckedBaggage(new BaggageSize(50, 30, 30), new Weight(20), "Suitcase")
             .Build("My baggage");
 
-        var z = MyBaggage.Name;
-
         Assert.That(MyBaggage, Is.Not.Null);
     }
 

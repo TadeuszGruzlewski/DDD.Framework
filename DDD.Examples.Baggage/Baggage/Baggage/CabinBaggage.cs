@@ -2,7 +2,7 @@
 
 namespace DDD.Examples.Baggage;
 
-public record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
+public record class CabinBaggage(BaggageAllowance Allowance, string Name) : ValueObject(Name)
 {
     protected record class Validator(NotificationCollector Collector, BaggageAllowance Allowance) : InvariantValidator(Collector)
     {
@@ -16,14 +16,14 @@ public record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
         }
     }
 
-    public readonly Accessories Accessories = new(Allowance);
+    public readonly Accessories Accessories = new(Allowance, "Accessories");
 
-    public readonly HandBaggage HandBaggage = new(Allowance);
+    public readonly HandBaggage HandBaggage = new(Allowance, "Hand baggage");
 
-    public void AddAccessory(BaggageSize size, Weight weight, string description) =>
-        Accessories.AddAccessory(size, weight, description);
-    public void AddHandBaggage(BaggageSize size, Weight weight, string description) =>
-        HandBaggage.AddHandBaggage(size, weight, description);
+    public void AddAccessory(BaggageSize size, Weight weight, string name) =>
+        Accessories.AddAccessory(size, weight, name);
+    public void AddHandBaggage(BaggageSize size, Weight weight, string name) => 
+        HandBaggage.AddHandBaggage(size, weight, name);
 
     protected override bool LocalValidate(NotificationCollector collector)
     {
@@ -31,7 +31,7 @@ public record class CabinBaggage(BaggageAllowance Allowance) : ValueObject
         var weight = Accessories.Weight + HandBaggage.Weight;
         return
             validator.IsAllowedWeight(weight) &
-            Accessories.Validate(collector, "Accessories") &
-            HandBaggage.Validate(collector, "Hand baggage");
+            Accessories.Validate(collector, Accessories.Name!) &
+            HandBaggage.Validate(collector, HandBaggage.Name!);
     }
 }

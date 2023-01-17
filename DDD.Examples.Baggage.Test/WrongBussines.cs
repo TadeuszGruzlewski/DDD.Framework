@@ -6,7 +6,7 @@ public class WrongBussines
     [Test]
     public void NoAllowanceSpecified()
     {
-        Assert.Throws<ArgumentNullException>(() => new BaggageBuilder(null));
+        Assert.Throws<ArgumentNullException>(() => new BaggageBuilder(null), "");
     }
 
     [Test]

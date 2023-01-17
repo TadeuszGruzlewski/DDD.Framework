@@ -15,7 +15,7 @@ public class BaseTests
         MyBuilder b;
 
         //Act and Assert
-        Assert.Throws<ArgumentNullException>(() => entity = new(null));
+        Assert.Throws<ArgumentNullException>(() => entity = new(null), "");
     }
 
     [Test]

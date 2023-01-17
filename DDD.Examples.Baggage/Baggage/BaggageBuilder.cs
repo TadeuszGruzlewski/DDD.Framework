@@ -11,21 +11,21 @@ public class BaggageBuilder : VOBuilder<Baggage>
         valueObject!.SetAllowance(baggageAllowance);
     }
 
-    public BaggageBuilder AddAccessory(BaggageSize size, Weight weight, string description)
+    public BaggageBuilder AddAccessory(BaggageSize size, Weight weight, string name)
     {
-        valueObject!.AddAccessory(size, weight, description);
+        valueObject!.AddAccessory(size, weight, name);
         return this;
     }
 
-    public BaggageBuilder AddHandBaggage(BaggageSize size, Weight weight, string description)
+    public BaggageBuilder AddHandBaggage(BaggageSize size, Weight weight, string name)
     {
-        valueObject!.AddHandBaggage(size, weight, description);
+        valueObject!.AddHandBaggage(size, weight, name);
         return this;
     }
 
-    public BaggageBuilder AddCheckedBaggage(BaggageSize size, Weight weight, string description)
+    public BaggageBuilder AddCheckedBaggage(BaggageSize size, Weight weight, string name)
     {
-        valueObject!.AddCheckedBaggage(size, weight, description);
+        valueObject!.AddCheckedBaggage(size, weight, name);
         return this;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DDD.Examples.Baggage;
 
-public record class Accessories(BaggageAllowance Allowance) : ValueObject
+public record class Accessories(BaggageAllowance Allowance, string Name) : ValueObject(Name)
 {
     protected record class Validator(NotificationCollector Collector, BaggageAllowance Allowance) : InvariantValidator(Collector)
     {
@@ -23,9 +23,9 @@ public record class Accessories(BaggageAllowance Allowance) : ValueObject
 
     public int NumberOfItems => baggageItems.Count;
 
-    public void AddAccessory(BaggageSize size, Weight weight, string description)
+    public void AddAccessory(BaggageSize size, Weight weight, string name)
     {
-        AccessoryItem accessoryItem = new(size, weight, description, Allowance);
+        AccessoryItem accessoryItem = new(size, weight, name, Allowance);
         baggageItems.Add(accessoryItem);
     }
 

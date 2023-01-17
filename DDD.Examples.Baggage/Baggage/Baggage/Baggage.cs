@@ -1,10 +1,11 @@
 ﻿using DDD.Foundations;
+using System.Xml.Linq;
 
 namespace DDD.Examples.Baggage;
 
 public record class Baggage : ValueObject
 {
-    // Internal construct so Baggage can be created by the BaggageBuilder only
+    // Internal constructor so Baggage can be created by the BaggageBuilder only
     internal Baggage() { }
 
     public CabinBaggage? CabinBaggage { get; private set; }
@@ -14,18 +15,18 @@ public record class Baggage : ValueObject
     {
         if (allowance is null)
             throw new ArgumentNullException(nameof(allowance));
-        CabinBaggage = new(allowance);
-        CheckedBaggage = new(allowance);
+        CabinBaggage = new(allowance, "Cabin baggage");
+        CheckedBaggage = new(allowance, "Checked baggage");
     }
 
-    internal void AddAccessory(BaggageSize size, Weight weight, string description) =>
-        CabinBaggage!.AddAccessory(size, weight, description);
-    internal void AddHandBaggage(BaggageSize size, Weight weight, string description) =>
-        CabinBaggage!.AddHandBaggage(size, weight, description);
-    internal void AddCheckedBaggage(BaggageSize size, Weight weight, string description) =>
-        CheckedBaggage!.AddCheckedBaggage(size, weight, description);
+    internal void AddAccessory(BaggageSize size, Weight weight, string name) =>
+        CabinBaggage!.AddAccessory(size, weight, name);
+    internal void AddHandBaggage(BaggageSize size, Weight weight, string name) =>
+        CabinBaggage!.AddHandBaggage(size, weight, name);
+    internal void AddCheckedBaggage(BaggageSize size, Weight weight, string name) =>
+        CheckedBaggage!.AddCheckedBaggage(size, weight, name);
 
     protected override bool LocalValidate(NotificationCollector collector) =>
-        CabinBaggage!.Validate(collector, "Cabin baggage") &
-        CheckedBaggage!.Validate(collector, "Checked baggage");
+        CabinBaggage!.Validate(collector, CabinBaggage.Name!) &
+        CheckedBaggage!.Validate(collector, CheckedBaggage.Name!);
 }
