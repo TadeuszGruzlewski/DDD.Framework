@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DDD.Examples.Baggage\DDD.Examples.Baggage.csproj" />
     <ProjectReference Include="..\DDD.Examples\DDD.Examples.csproj" />
     <ProjectReference Include="..\DDD.Foundations\DDD.Foundations.csproj" />
     <ProjectReference Include="..\DDD.Primitives\DDD.Primitives.csproj" />

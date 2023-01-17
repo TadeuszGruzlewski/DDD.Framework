@@ -12,7 +12,7 @@ public class NotificationCollector
     public void EnterEmbeddedScope(string scopeName)
     {
         if (Scope is null)
-            currentScope = Scope = new (scopeName);
+            currentScope = Scope = new(scopeName);
         else
             currentScope = currentScope?.AddEmbeddedScope(scopeName);
     }
@@ -25,7 +25,7 @@ public class NotificationCollector
     public bool HasErrors => ErrorsCount > 0;
     public int ErrorsCount => Scope?.ErrorsCount ?? 0;
 
-    JsonSerializerOptions options = new()
+    private JsonSerializerOptions options = new()
     {
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
         WriteIndented = true
