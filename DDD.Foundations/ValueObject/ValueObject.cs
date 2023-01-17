@@ -3,8 +3,6 @@ namespace DDD.Foundations;
 
 public abstract record class ValueObject(string? Name = default)
 {
-    public string Name { get; protected set; } = "";
-
     public bool IsValidated { get; private set; } = false;
     public bool? IsValid { get; private set; } = null;
 
