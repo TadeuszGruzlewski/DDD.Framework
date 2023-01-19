@@ -6,7 +6,7 @@ public class BaggageBuilder : VOBuilder<Baggage>
 {
     // valueObject is created in the base VOBuilder
     // its type is Baggage
-    public BaggageBuilder(BaggageAllowance baggageAllowance)
+    public BaggageBuilder(BaggageAllowance baggageAllowance, string valueObjectName) : base(valueObjectName)
     {
         valueObject!.SetAllowance(baggageAllowance);
     }

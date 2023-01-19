@@ -1,18 +1,20 @@
 ﻿
 namespace DDD.Foundations;
 
-public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject
+public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject//, new()
 {
     protected VO? valueObject;
 
-    public VOBuilder() =>
-        valueObject = (VO?)Activator.CreateInstance(typeof(VO), true);
+    public VOBuilder(string valueObjectName) =>
+        //   valueObject = new VO("a");
+        //   valueObject = (VO?)Activator.CreateInstance(typeof(VO), BindingFlags.NonPublic, new object[] { valueObjectName });
+        valueObject = (VO?)Activator.CreateInstance(typeof(VO), new object[] { valueObjectName });
 
     public NotificationCollector NotificationCollector { get; } = new();
 
-    public VO? Build(string objectName)
+    public VO? Build()
     {
-        valueObject?.Validate(NotificationCollector, objectName);
+        valueObject?.Validate(NotificationCollector, valueObject.Name!);
         return NotificationCollector.HasErrors ? null : valueObject;
     }
 }

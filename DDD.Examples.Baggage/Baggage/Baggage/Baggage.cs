@@ -1,12 +1,11 @@
 ﻿using DDD.Foundations;
-using System.Xml.Linq;
 
 namespace DDD.Examples.Baggage;
 
 public record class Baggage : ValueObject
 {
-    // Internal constructor so Baggage can be created by the BaggageBuilder only
-    internal Baggage() { }
+    // TODO Internal constructor so Baggage can be created by the BaggageBuilder only
+    public Baggage(string valueObjectName) : base(valueObjectName) { }
 
     public CabinBaggage? CabinBaggage { get; private set; }
     public CheckedBaggage? CheckedBaggage { get; private set; }
