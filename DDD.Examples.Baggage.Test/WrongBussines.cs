@@ -72,7 +72,7 @@ public class WrongBussines
     [Test]
     public void AllPossibleErrors()
     {
-        var B = new BaggageBuilder(new BusinessBaggageAllowance(), "Baggage");
+        var B = new BaggageBuilder(new BusinessBaggageAllowance(), "Baggage of Tadeusz");
 
         B.AddAccessory(new BaggageSize(80, 10, 10), new Weight(50), "Laptop")
             .AddAccessory(new BaggageSize(80, 10, 10), new Weight(50), "Camera")

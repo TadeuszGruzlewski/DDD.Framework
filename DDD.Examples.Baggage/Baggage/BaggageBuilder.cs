@@ -4,12 +4,14 @@ namespace DDD.Examples.Baggage;
 
 public class BaggageBuilder : VOBuilder<Baggage>
 {
-    // valueObject is created in the base VOBuilder
-    // its type is Baggage
-    public BaggageBuilder(BaggageAllowance baggageAllowance, string valueObjectName) : base(valueObjectName)
-    {
+    // valueObject is created in the base VOBuilder through delegation to Create method
+    public BaggageBuilder(BaggageAllowance baggageAllowance, string valueObjectName) : base(valueObjectName) =>
         valueObject!.SetAllowance(baggageAllowance);
-    }
+
+    protected override Baggage Create(string valueObjectName) => new(valueObjectName);
+
+    //protected override Func<Baggage> Create(string valueObjectName) =>
+    //    () => new Baggage(valueObjectName);
 
     public BaggageBuilder AddAccessory(BaggageSize size, Weight weight, string name)
     {
