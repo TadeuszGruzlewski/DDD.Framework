@@ -2,14 +2,16 @@
 
 public abstract record class Primitive
 {
-    public string ErrorMsg { get; set; } = string.Empty;
+    private string errorMsg = string.Empty;
+
+    protected void SetErrorMsg(string errorMsg) => this.errorMsg = errorMsg;
 
     public abstract bool IsValid();
 
     protected Primitive()
     {
         if (!IsValid())
-            throw new ArgumentException(ErrorMsg);
+            throw new ArgumentException(errorMsg);
     }
 
     //not thread safe in this form
@@ -34,6 +36,6 @@ public abstract record class Primitive
         // Activator is not using a primary constructor. We enforce validation.
         if (q!.IsValid())
             return q;
-        throw new ArgumentException(q.ErrorMsg);
+        throw new ArgumentException(q.errorMsg);
     }
 }

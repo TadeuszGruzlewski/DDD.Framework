@@ -10,7 +10,7 @@ internal record class Key(long Value) : Primitive
     {
         var valid = Value > 0;
         if (!valid)
-            ErrorMsg = $"{GetType().Name}.Value must be a positive number.";
+            SetErrorMsg($"{GetType().Name}.Value must be a positive number.");
         return valid;
     }
 }

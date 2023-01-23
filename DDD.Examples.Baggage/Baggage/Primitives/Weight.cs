@@ -15,7 +15,7 @@ public record class Weight(decimal Value) : Primitive
     {
         bool valid = 0 <= Value;
         if (!valid)
-            ErrorMsg = $"{GetType()}.Value must not be negative.";
+            SetErrorMsg($"{GetType()}.Value must not be negative.");
         return valid;
     }
 }

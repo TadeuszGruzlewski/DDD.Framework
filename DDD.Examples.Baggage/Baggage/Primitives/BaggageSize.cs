@@ -20,7 +20,7 @@ public record class BaggageSize(int Length, int Width, int Height) : Primitive
     {
         bool valid = 0 <= Length & 0 <= Width & 0 <= Height;
         if (!valid)
-            ErrorMsg = $"All dimensions of {GetType().Name} must not be negative.";
+            SetErrorMsg($"All dimensions of {GetType().Name} must not be negative.");
         return valid;
     }
 }

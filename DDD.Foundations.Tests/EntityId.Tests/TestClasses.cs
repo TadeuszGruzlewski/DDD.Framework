@@ -31,7 +31,7 @@ public abstract record class MyId(long Code) : EntityId
     }
 }
 
-public record class NullMyId() : MyId(0)
+public record class NullMyId(string ErrorMsg) : MyId(0)
 {
     public override bool IsValid() => true;
 }
@@ -43,7 +43,7 @@ public record class MyId1(long Code) : MyId(Code)
         // example validation
         var valid = (1000 < Code) & (Code <= 2000);
         if (!valid)
-            ErrorMsg = $"{GetType().Name}.Code must be in the range of (1001, 2000)";
+            SetErrorMsg($"{GetType().Name}.Code must be in the range of (1001, 2000)");
         return valid;
     }
 }
@@ -55,7 +55,7 @@ public record class MyId2(long Code) : MyId(Code)
         // example validation
         var valid = (2000 < Code) & (Code <= 3000);
         if (!valid)
-            ErrorMsg = $"{GetType().Name}.Code must be in the range of (2001, 3000)";
+            SetErrorMsg($"{GetType().Name}.Code must be in the range of (2001, 3000)");
         return valid;
     }
 }
@@ -76,7 +76,7 @@ public static class MyIdFactory
         }
         catch (Exception ex)
         {
-            return new NullMyId() { ErrorMsg = ex.Message };
+            return new NullMyId(ex.Message);
         }
     }
 }

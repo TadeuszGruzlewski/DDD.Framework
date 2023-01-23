@@ -16,7 +16,7 @@ public abstract record class Quantity : Primitive
     {
         bool valid = Amount >= 0;
         if (!valid)
-            ErrorMsg = $"{GetType().Name}.Amount must not be negative.";
+            SetErrorMsg($"{GetType().Name}.Amount must not be negative.");
         return valid;
     }
 
