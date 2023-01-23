@@ -10,11 +10,8 @@ public record class Cuboid(int Length, int Width, int Height) : Primitive
 
     public static bool operator <=(Cuboid s1, Cuboid s2) =>
         s1.Length <= s2.Length & s1.Width <= s2.Width & s1.Height <= s2.Height;
-    public static bool operator >=(Cuboid s1, Cuboid s2) => !(s1 <= s2);
-
-    public static bool operator <=(Cuboid s, decimal sum) =>
-        s.Length + s.Width + s.Height <= sum;
-    public static bool operator >=(Cuboid s, decimal sum) => !(s <= sum);
+    public static bool operator >=(Cuboid s1, Cuboid s2) =>
+        s1.Length >= s2.Length & s1.Width >= s2.Width & s1.Height >= s2.Height;
 
     public override bool IsValid()
     {
