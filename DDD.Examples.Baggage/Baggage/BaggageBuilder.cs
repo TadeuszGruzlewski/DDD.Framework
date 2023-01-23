@@ -2,7 +2,7 @@
 
 namespace DDD.Examples.Baggage;
 
-public class BaggageBuilder : VOBuilder<Baggage>
+public sealed class BaggageBuilder : VOBuilder<Baggage>
 {
     // valueObject is created in the base VOBuilder through delegation to Create method
     public BaggageBuilder(BaggageAllowance baggageAllowance, string valueObjectName) : base(valueObjectName) =>
