@@ -21,7 +21,7 @@ public record class CheckedBaggage(BaggageAllowance Allowance, string Name) : Va
 
     public int NumberOfItems => baggageItems.Count;
 
-    public void AddCheckedBaggage(BaggageSize size, Weight weight, string name)
+    public void AddCheckedBaggage(Size size, Weight weight, string name)
     {
         CheckedItem checkedItem = new(size, weight, name, Allowance);
         baggageItems.Add(checkedItem);

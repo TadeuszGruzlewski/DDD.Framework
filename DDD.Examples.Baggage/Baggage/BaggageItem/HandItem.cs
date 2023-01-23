@@ -3,7 +3,7 @@ using DDD.Foundations;
 
 namespace DDD.Examples.Baggage;
 
-public record class HandItem(BaggageSize Size, Weight Weight, string Name, BaggageAllowance Allowance) : BaggageItem(Size, Weight, Name, Allowance)
+public record class HandItem(Size Size, Weight Weight, string Name, BaggageAllowance Allowance) : BaggageItem(Size, Weight, Name, Allowance)
 {
     private record class Validator(NotificationCollector Collector, BaggageAllowance Allowance) : InvariantValidator(Collector)
     {
@@ -11,7 +11,7 @@ public record class HandItem(BaggageSize Size, Weight Weight, string Name, Bagga
         {
             var valid = baggageItem.Size <= Allowance.HandItemSize;
             if (!valid)
-                AddError($"Size exceeds allowed {Allowance.HandItemSize}.");
+                AddError($"Item exceeds allowed {Allowance.HandItemSize}.");
             return valid;
         }
     }

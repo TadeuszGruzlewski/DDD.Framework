@@ -18,11 +18,11 @@ public record class Baggage : ValueObject
         CheckedBaggage = new(allowance, "Checked baggage");
     }
 
-    internal void AddAccessory(BaggageSize size, Weight weight, string name) =>
+    internal void AddAccessory(Size size, Weight weight, string name) =>
         CabinBaggage!.AddAccessory(size, weight, name);
-    internal void AddHandBaggage(BaggageSize size, Weight weight, string name) =>
+    internal void AddHandBaggage(Size size, Weight weight, string name) =>
         CabinBaggage!.AddHandBaggage(size, weight, name);
-    internal void AddCheckedBaggage(BaggageSize size, Weight weight, string name) =>
+    internal void AddCheckedBaggage(Size size, Weight weight, string name) =>
         CheckedBaggage!.AddCheckedBaggage(size, weight, name);
 
     protected override bool LocalValidate(NotificationCollector collector) =>

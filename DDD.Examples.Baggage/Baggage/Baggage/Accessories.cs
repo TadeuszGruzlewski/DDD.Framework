@@ -23,7 +23,7 @@ public record class Accessories(BaggageAllowance Allowance, string Name) : Value
 
     public int NumberOfItems => baggageItems.Count;
 
-    public void AddAccessory(BaggageSize size, Weight weight, string name)
+    public void AddAccessory(Size size, Weight weight, string name)
     {
         AccessoryItem accessoryItem = new(size, weight, name, Allowance);
         baggageItems.Add(accessoryItem);

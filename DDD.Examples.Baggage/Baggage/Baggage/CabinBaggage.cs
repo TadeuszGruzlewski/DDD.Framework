@@ -20,9 +20,9 @@ public record class CabinBaggage(BaggageAllowance Allowance, string Name) : Valu
 
     public readonly HandBaggage HandBaggage = new(Allowance, "Hand baggage");
 
-    public void AddAccessory(BaggageSize size, Weight weight, string name) =>
+    public void AddAccessory(Size size, Weight weight, string name) =>
         Accessories.AddAccessory(size, weight, name);
-    public void AddHandBaggage(BaggageSize size, Weight weight, string name) => 
+    public void AddHandBaggage(Size size, Weight weight, string name) => 
         HandBaggage.AddHandBaggage(size, weight, name);
 
     protected override bool LocalValidate(NotificationCollector collector)
