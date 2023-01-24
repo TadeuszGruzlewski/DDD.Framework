@@ -6,7 +6,7 @@ public class InvariantScope
 {
     public string? Name { get; init; }
     [JsonIgnore]
-    public InvariantScope? Parent { get; internal init; } = null;
+    internal InvariantScope? Parent { get; private set; } = null;
     [JsonIgnore]
     public int ErrorsCount => embeddedScopes.Sum(c => c.ErrorsCount) + errors.Count;
 
@@ -16,17 +16,17 @@ public class InvariantScope
     public IReadOnlyCollection<InvariantScope> EmbeddedScopes => embeddedScopes;
     private readonly List<InvariantScope> embeddedScopes = new();
 
-    public InvariantScope(string name)
+    internal InvariantScope(string name)
     {
         Name = name;
     }
 
-    public InvariantScope AddEmbeddedScope(string name)
+    internal InvariantScope AddEmbeddedScope(string name)
     {
         var scope = new InvariantScope(name) { Parent = this };
         embeddedScopes.Add(scope);
         return scope;
     }
 
-    public void AddError(string message) => errors.Add(message);
+    internal void AddError(string message) => errors.Add(message);
 }

@@ -5,30 +5,29 @@ namespace DDD.Foundations;
 
 public class NotificationCollector
 {
-    public InvariantScope? Scope { get; private set; }
-
+    private InvariantScope? rootScope;
     private InvariantScope? currentScope;
 
-    public void EnterEmbeddedScope(string scopeName)
+    internal void EnterEmbeddedScope(string scopeName)
     {
-        if (Scope is null)
-            currentScope = Scope = new(scopeName);
+        if (rootScope is null)
+            currentScope = rootScope = new(scopeName);
         else
             currentScope = currentScope?.AddEmbeddedScope(scopeName);
     }
 
-    public void ExitEmbeddedScope() => 
+    internal void ExitEmbeddedScope() => 
         currentScope = currentScope?.Parent;
 
     public void AddError(string message) => currentScope?.AddError(message);
 
     public bool HasErrors => ErrorsCount > 0;
-    public int ErrorsCount => Scope?.ErrorsCount ?? 0;
+    public int ErrorsCount => rootScope?.ErrorsCount ?? 0;
 
     private JsonSerializerOptions options = new()
     {
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
         WriteIndented = true
     };
-    public string? ErrorsAsJson => JsonSerializer.Serialize(Scope, options);
+    public string? ErrorsAsJson => JsonSerializer.Serialize(rootScope, options);
 }
