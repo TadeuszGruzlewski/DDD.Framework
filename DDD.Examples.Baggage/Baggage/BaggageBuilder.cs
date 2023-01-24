@@ -10,9 +10,6 @@ public sealed class BaggageBuilder : VOBuilder<Baggage>
 
     protected override Baggage Create(string valueObjectName) => new(valueObjectName);
 
-    //protected override Func<Baggage> Create(string valueObjectName) =>
-    //    () => new Baggage(valueObjectName);
-
     public BaggageBuilder AddAccessory(Size size, Weight weight, string name)
     {
         valueObject!.AddAccessory(size, weight, name);

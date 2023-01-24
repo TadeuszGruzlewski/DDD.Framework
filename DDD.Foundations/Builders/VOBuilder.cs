@@ -12,10 +12,6 @@ public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject
 
     protected abstract VO Create(string valueObjectName);
 
-    //valueObject = Create(valueObjectName).Invoke();
-
-    //protected abstract Func<VO> Create(string valueObjectName);
-
     public VO? Build()
     {
         valueObject.Validate(NotificationCollector, valueObject.Name!);
