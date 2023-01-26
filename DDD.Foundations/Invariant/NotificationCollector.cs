@@ -5,8 +5,8 @@ namespace DDD.Foundations;
 
 public class NotificationCollector
 {
-    public InvariantScope? RootScope { get; private set; }
-    private InvariantScope? CurrentScope;
+    public NotificationScope? RootScope { get; private set; }
+    private NotificationScope? CurrentScope;
 
     internal void EnterEmbeddedScope(string? scopeName)
     {
@@ -24,7 +24,7 @@ public class NotificationCollector
     public bool HasErrors => ErrorsCount > 0;
     public int ErrorsCount => RootScope?.ErrorsCount ?? 0;
 
-    private JsonSerializerOptions options = new()
+    private readonly JsonSerializerOptions options = new()
     {
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
         WriteIndented = true

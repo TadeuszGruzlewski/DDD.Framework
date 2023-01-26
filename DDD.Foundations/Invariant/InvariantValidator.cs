@@ -1,7 +1,7 @@
 ﻿
 namespace DDD.Foundations;
 
-public record class InvariantValidator(NotificationCollector Collector)
+public abstract record class InvariantValidator(NotificationCollector Collector)
 {
     protected void AddError(string message) => Collector.AddError(message);
 }

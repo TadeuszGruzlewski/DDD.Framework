@@ -2,25 +2,25 @@
 
 namespace DDD.Foundations;
 
-public class InvariantScope
+public class NotificationScope
 {
     public string? Name { get; init; }
     [JsonIgnore]
-    public InvariantScope? Parent { get; private set; } = null;
+    public NotificationScope? Parent { get; private set; } = null;
     [JsonIgnore]
     public int ErrorsCount => embeddedScopes.Sum(c => c.ErrorsCount) + errors.Count;
 
     public IReadOnlyCollection<string> Errors => errors;
     private readonly List<string> errors = new();
 
-    public IReadOnlyCollection<InvariantScope> EmbeddedScopes => embeddedScopes;
-    private readonly List<InvariantScope> embeddedScopes = new();
+    public IReadOnlyCollection<NotificationScope> EmbeddedScopes => embeddedScopes;
+    private readonly List<NotificationScope> embeddedScopes = new();
 
-    internal InvariantScope(string? name) => Name = name;
+    internal NotificationScope(string? name) => Name = name;
 
-    internal InvariantScope AddEmbeddedScope(string? name)
+    internal NotificationScope AddEmbeddedScope(string? name)
     {
-        var scope = new InvariantScope(name) { Parent = this };
+        var scope = new NotificationScope(name) { Parent = this };
         embeddedScopes.Add(scope);
         return scope;
     }
