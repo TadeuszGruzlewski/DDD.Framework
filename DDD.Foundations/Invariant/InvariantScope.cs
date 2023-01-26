@@ -16,9 +16,9 @@ public class InvariantScope
     public IReadOnlyCollection<InvariantScope> EmbeddedScopes => embeddedScopes;
     private readonly List<InvariantScope> embeddedScopes = new();
 
-    internal InvariantScope(string name) => Name = name;
+    internal InvariantScope(string? name) => Name = name;
 
-    internal InvariantScope AddEmbeddedScope(string name)
+    internal InvariantScope AddEmbeddedScope(string? name)
     {
         var scope = new InvariantScope(name) { Parent = this };
         embeddedScopes.Add(scope);

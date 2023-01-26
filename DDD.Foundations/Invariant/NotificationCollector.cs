@@ -8,7 +8,7 @@ public class NotificationCollector
     public InvariantScope? RootScope { get; private set; }
     private InvariantScope? CurrentScope;
 
-    internal void EnterEmbeddedScope(string scopeName)
+    internal void EnterEmbeddedScope(string? scopeName)
     {
         if (RootScope is null)
             CurrentScope = RootScope = new(scopeName);
@@ -19,7 +19,7 @@ public class NotificationCollector
     internal void ExitEmbeddedScope() => 
         CurrentScope = CurrentScope?.Parent;
 
-    public void AddError(string message) => CurrentScope?.AddError(message);
+    internal void AddError(string message) => CurrentScope?.AddError(message);
 
     public bool HasErrors => ErrorsCount > 0;
     public int ErrorsCount => RootScope?.ErrorsCount ?? 0;

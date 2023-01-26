@@ -31,7 +31,7 @@ public record class CabinBaggage(BaggageAllowance Allowance, string Name) : Valu
         var weight = Accessories.Weight + HandBaggage.Weight;
         return
             validator.IsAllowedWeight(weight) &
-            Accessories.Validate(collector, Accessories.Name!) &
-            HandBaggage.Validate(collector, HandBaggage.Name!);
+            Accessories.Validate(collector) &
+            HandBaggage.Validate(collector);
     }
 }

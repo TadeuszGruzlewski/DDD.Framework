@@ -26,6 +26,6 @@ public record class Baggage : ValueObject
         CheckedBaggage!.AddCheckedBaggage(size, weight, name);
 
     protected override bool LocalValidate(NotificationCollector collector) =>
-        CabinBaggage!.Validate(collector, CabinBaggage.Name!) &
-        CheckedBaggage!.Validate(collector, CheckedBaggage.Name!);
+        CabinBaggage!.Validate(collector) &
+        CheckedBaggage!.Validate(collector);
 }

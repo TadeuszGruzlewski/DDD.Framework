@@ -14,7 +14,7 @@ public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject
 
     public VO? Build()
     {
-        valueObject.Validate(NotificationCollector, valueObject.Name!);
+        valueObject.Validate(NotificationCollector);
         return NotificationCollector.HasErrors ? null : valueObject;
     }
 }

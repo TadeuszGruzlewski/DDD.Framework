@@ -32,7 +32,7 @@ public record class CheckedBaggage(BaggageAllowance Allowance, string Name) : Va
         var validator = new Validator(collector, Allowance);
         var valid = validator.IsAllowedNumber(NumberOfItems);
         foreach (var item in baggageItems)
-            valid &= item.Validate(collector, item.Name!); 
+            valid &= item.Validate(collector);
         return valid;
     }
 }

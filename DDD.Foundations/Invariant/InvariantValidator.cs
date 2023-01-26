@@ -4,6 +4,8 @@ namespace DDD.Foundations;
 public record class InvariantValidator(NotificationCollector Collector)
 {
     protected void AddError(string message) => Collector.AddError(message);
+}
+
 
     //public bool IsNotNullArgument(object? obj, string name)
     //{
@@ -72,4 +74,4 @@ public record class InvariantValidator(NotificationCollector Collector)
     //        AddError(InvariantErrorCode.AboveMaximum, name, $"Must be below {maximum}");
     //    return valid;
     //}
-}
+//}
