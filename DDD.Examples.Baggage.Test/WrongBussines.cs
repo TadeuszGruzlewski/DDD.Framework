@@ -85,6 +85,7 @@ public class WrongBussines
             .Build();
 
         Assert.That(B.NotificationCollector.HasErrors);
+        Assert.That(B.NotificationCollector.ErrorsCount, Is.EqualTo(15));
     }
 
 }

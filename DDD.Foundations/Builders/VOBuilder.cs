@@ -7,10 +7,9 @@ public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject
 
     public NotificationCollector NotificationCollector { get; } = new();
 
-    public VOBuilder(string rootName) =>
-        Root = Create(rootName);
+    public VOBuilder(string rootName) => Root = CreateRoot(rootName);
 
-    protected abstract VO Create(string rootName);
+    protected abstract VO CreateRoot(string rootName);
 
     public VO? Build()
     {

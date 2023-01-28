@@ -20,9 +20,9 @@ public abstract class Entity<TId> where TId : EntityId
     {
         if (!IsValidated)
         {
-            collector.EnterEmbeddedScope(scopeName);
+            collector.EnterScope(scopeName);
             IsValid = LocalValidate(collector);
-            collector.ExitEmbeddedScope();
+            collector.ExitScope();
             IsValidated = true;
         }
         return (bool)IsValid!;

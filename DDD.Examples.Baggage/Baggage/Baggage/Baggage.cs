@@ -4,7 +4,7 @@ namespace DDD.Examples.Baggage;
 
 public record class Baggage : ValueObject
 {
-    // Internal constructor so Baggage can be created by the BaggageBuilder only
+    // Internal constructor: Baggage can be created by the BaggageBuilder only
     internal Baggage(string rootName) : base(rootName) { }
 
     public CabinBaggage? CabinBaggage { get; private set; }

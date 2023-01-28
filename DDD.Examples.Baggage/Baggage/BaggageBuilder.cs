@@ -4,11 +4,11 @@ namespace DDD.Examples.Baggage;
 
 public sealed class BaggageBuilder : VOBuilder<Baggage>
 {
-    // Root value object is created in the base VOBuilder through delegation to the Create method
     public BaggageBuilder(BaggageAllowance allowance, string rootName) : base(rootName) =>
         Root.SetAllowance(allowance);
 
-    protected override Baggage Create(string rootName) => new(rootName);
+    // Root value object is assigned in the VOBuilder
+    protected override Baggage CreateRoot(string rootName) => new(rootName);
 
     public BaggageBuilder AddAccessory(Size size, Weight weight, string name)
     {

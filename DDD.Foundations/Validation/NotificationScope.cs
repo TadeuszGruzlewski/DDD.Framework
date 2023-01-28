@@ -8,20 +8,20 @@ public class NotificationScope
     [JsonIgnore]
     public NotificationScope? Parent { get; private set; } = null;
     [JsonIgnore]
-    public int ErrorsCount => embeddedScopes.Sum(c => c.ErrorsCount) + errors.Count;
+    public int ErrorsCount => innerScopes.Sum(c => c.ErrorsCount) + errors.Count;
 
     public IReadOnlyCollection<string> Errors => errors;
     private readonly List<string> errors = new();
 
-    public IReadOnlyCollection<NotificationScope> EmbeddedScopes => embeddedScopes;
-    private readonly List<NotificationScope> embeddedScopes = new();
+    public IReadOnlyCollection<NotificationScope> InnerScopes => innerScopes;
+    private readonly List<NotificationScope> innerScopes = new();
 
     internal NotificationScope(string? name) => Name = name;
 
-    internal NotificationScope AddEmbeddedScope(string? name)
+    internal NotificationScope AddInnerScope(string? name)
     {
         var scope = new NotificationScope(name) { Parent = this };
-        embeddedScopes.Add(scope);
+        innerScopes.Add(scope);
         return scope;
     }
 

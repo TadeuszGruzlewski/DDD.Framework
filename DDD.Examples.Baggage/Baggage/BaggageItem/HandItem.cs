@@ -7,9 +7,9 @@ public record class HandItem(Size Size, Weight Weight, string Name, BaggageAllow
 {
     private record class Validator(NotificationCollector Collector, BaggageAllowance Allowance) : InvariantValidator(Collector)
     {
-        public bool IsAllowedSize(BaggageItem baggageItem)
+        public bool IsAllowedSize(BaggageItem item)
         {
-            var valid = baggageItem.Size <= Allowance.HandItemSize;
+            var valid = item.Size <= Allowance.HandItemSize;
             if (!valid)
                 AddError($"Item exceeds allowed {Allowance.HandItemSize}.");
             return valid;

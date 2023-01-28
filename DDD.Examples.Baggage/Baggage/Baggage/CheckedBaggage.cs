@@ -8,7 +8,7 @@ public record class CheckedBaggage(BaggageAllowance Allowance, string Name) : Va
     {
         public bool IsAllowedNumber(decimal numberOfItems)
         {
-            var allowedNumber = Allowance.NumberOfCheckedBaggages; 
+            var allowedNumber = Allowance.NumberOfCheckedItems; 
             var valid = numberOfItems <= allowedNumber;
             if (!valid)
                 AddError($"Number of {numberOfItems} checked items exceeds the allowed limit of {allowedNumber}.");

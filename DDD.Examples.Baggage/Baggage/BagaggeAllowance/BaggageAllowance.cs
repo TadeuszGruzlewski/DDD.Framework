@@ -10,8 +10,8 @@ public abstract record class BaggageAllowance
     public int CheckedItemSize = 158;
 
     public abstract int NumberOfAccessories { get; }
-    public abstract int NumberOfHandBaggages { get; }
-    public abstract int NumberOfCheckedBaggages { get; }
+    public abstract int NumberOfHandItems { get; }
+    public abstract int NumberOfCheckedItems { get; }
 
     public abstract Weight WeightOfAllCabinBaggage { get; }
     public abstract Weight WeightOfOneCheckedBaggage { get; }

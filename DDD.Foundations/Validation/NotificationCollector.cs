@@ -8,15 +8,15 @@ public class NotificationCollector
     public NotificationScope? RootScope { get; private set; }
     private NotificationScope? CurrentScope;
 
-    internal void EnterEmbeddedScope(string? scopeName)
+    internal void EnterScope(string? scopeName)
     {
         if (RootScope is null)
             CurrentScope = RootScope = new(scopeName);
         else
-            CurrentScope = CurrentScope?.AddEmbeddedScope(scopeName);
+            CurrentScope = CurrentScope?.AddInnerScope(scopeName);
     }
 
-    internal void ExitEmbeddedScope() => 
+    internal void ExitScope() => 
         CurrentScope = CurrentScope?.Parent;
 
     internal void AddError(string message) => CurrentScope?.AddError(message);
