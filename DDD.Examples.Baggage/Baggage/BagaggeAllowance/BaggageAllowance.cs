@@ -7,7 +7,7 @@ public abstract record class BaggageAllowance
 
     public Size HandItemSize = new(55, 35, 25);
 
-    public int CheckedItemSize = 158;
+    public int CheckedItemSize = 158; // sum of 3 dimensions
 
     public abstract int NumberOfAccessories { get; }
     public abstract int NumberOfHandItems { get; }

@@ -8,16 +8,15 @@ public class NotificationCollector
     public NotificationScope? RootScope { get; private set; }
     private NotificationScope? CurrentScope;
 
-    internal void EnterScope(string? scopeName)
+    internal void EnterSubscope(string? scopeName)
     {
-        if (RootScope is null)
+        if (CurrentScope is null)
             CurrentScope = RootScope = new(scopeName);
         else
-            CurrentScope = CurrentScope?.AddInnerScope(scopeName);
+            CurrentScope = CurrentScope!.AddSubscope(scopeName);
     }
 
-    internal void ExitScope() => 
-        CurrentScope = CurrentScope?.Parent;
+    internal void ExitSubscope() => CurrentScope = CurrentScope?.Parent;
 
     internal void AddError(string message) => CurrentScope?.AddError(message);
 
@@ -29,5 +28,5 @@ public class NotificationCollector
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
         WriteIndented = true
     };
-    public string? ErrorsAsJson => JsonSerializer.Serialize(RootScope, options);
+    public string ErrorsAsJson => JsonSerializer.Serialize(RootScope, options);
 }

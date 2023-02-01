@@ -1,6 +1,6 @@
 ﻿namespace DDD.Foundations;
 
-public interface IVOBuilder<VO> where VO : ValueObject
+public interface IVOBuilder<TValueObject> where TValueObject : ValueObject
 {
-    VO? Build();
+    TValueObject? Build();
 }

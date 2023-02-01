@@ -1,4 +1,6 @@
-﻿namespace DDD.Foundations;
+﻿using System.Xml.Linq;
+
+namespace DDD.Foundations;
 
 public abstract class Entity<TId> where TId : EntityId
 {
@@ -11,21 +13,20 @@ public abstract class Entity<TId> where TId : EntityId
         Id = id;
     }
 
-    public bool IsValidated { get; private set; } = false;
-    public bool? IsValid { get; private set; } = null;
+    public bool? IsValid { get; private set; }
 
     protected abstract bool LocalValidate(NotificationCollector collector);
 
     public bool Validate(NotificationCollector collector, string scopeName)
     {
-        if (!IsValidated)
+        // validated already? - circuit breaker
+        if (IsValid is null)
         {
-            collector.EnterScope(scopeName);
+            collector.EnterSubscope(scopeName);
             IsValid = LocalValidate(collector);
-            collector.ExitScope();
-            IsValidated = true;
+            collector.ExitSubscope();
         }
-        return (bool)IsValid!;
+        return (bool)IsValid;
     }
 
     //We follow the Microsoft semantics.
@@ -37,7 +38,7 @@ public abstract class Entity<TId> where TId : EntityId
         e1 is null && e2 is null || e1 is not null && e1.Equals(e2);
     public static bool? operator !=(Entity<TId>? e1, Entity<TId>? e2) => !(e1 == e2);
 
-    public sealed override bool Equals(object? obj)
+    public override bool Equals(object? obj)
     {
         if (obj == null)
             return false;
@@ -47,5 +48,5 @@ public abstract class Entity<TId> where TId : EntityId
         return Id == entity.Id;
     }
 
-    public sealed override int GetHashCode() => Id.GetHashCode();
+    public override int GetHashCode() => Id.GetHashCode();
 }

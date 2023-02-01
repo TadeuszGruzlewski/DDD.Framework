@@ -7,9 +7,6 @@ public sealed class BaggageBuilder : VOBuilder<Baggage>
     public BaggageBuilder(BaggageAllowance allowance, string rootName) : base(rootName) =>
         Root.SetAllowance(allowance);
 
-    // Root value object is assigned in the VOBuilder
-    protected override Baggage CreateRoot(string rootName) => new(rootName);
-
     public BaggageBuilder AddAccessory(Size size, Weight weight, string name)
     {
         Root.AddAccessory(size, weight, name);

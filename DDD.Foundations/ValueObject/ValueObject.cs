@@ -12,9 +12,9 @@ public abstract record class ValueObject(string? Name = default)
         // validated already? - circuit breaker
         if (IsValid is null)
         {
-            collector.EnterScope(Name);
+            collector.EnterSubscope(Name);
             IsValid = LocalValidate(collector);
-            collector.ExitScope();
+            collector.ExitSubscope();
         }
         return (bool)IsValid;
     }
