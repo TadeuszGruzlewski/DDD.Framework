@@ -1,25 +1,20 @@
 ﻿
 namespace DDD.Foundations;
 
-public abstract class EntityBuilder<E, I> : IEntityBuilder<E, I> where E : Entity<I> where I : EntityId
+public abstract class EntityBuilder<TEntity, TEntityId> where TEntity : Entity<TEntityId> where TEntityId : EntityId
 {
-    protected readonly E? entity;
+    protected TEntity Root;
 
-    // TODO - CreateInstance for internal constructor of Entity
-    // At this moment the constructor is protected, which allows
-    // instantiation outside the builder
-    public EntityBuilder(I id)
+    // TODO similar to VOBuider
+    public EntityBuilder(TEntityId id)
     {
-        if (id is null)
-            throw new ArgumentNullException(nameof(id));
-        entity = (E?)Activator.CreateInstance(typeof(E), new object[] { id! });
     }
 
     public NotificationCollector NotificationCollector { get; } = new();
 
-    public E? Build()
+    public TEntity? Build()
     {
-        entity?.Validate(NotificationCollector, entity.Id.ToString());
-        return NotificationCollector.HasErrors ? null : entity;
+        Root.Validate(NotificationCollector, ""); // TEntityId.AsString);
+        return NotificationCollector.HasErrors ? null : Root;
     }
 }

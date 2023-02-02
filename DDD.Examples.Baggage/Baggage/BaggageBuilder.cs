@@ -2,7 +2,7 @@
 
 namespace DDD.Examples.Baggage;
 
-public sealed class BaggageBuilder : VOBuilder<Baggage>
+public class BaggageBuilder : VOBuilder<Baggage>
 {
     public BaggageBuilder(BaggageAllowance allowance, string rootName) : base(rootName) =>
         Root.SetAllowance(allowance);

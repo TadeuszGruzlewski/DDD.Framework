@@ -2,11 +2,11 @@
 
 namespace DDD.Foundations;
 
-public abstract class Entity<TId> where TId : EntityId
+public abstract class Entity<TEntityId> where TEntityId : EntityId
 {
-    public TId Id { get; init; }
+    public TEntityId Id { get; init; }
 
-    protected Entity(TId id)
+    protected Entity(TEntityId id)
     {
         if (id is null)
             throw new ArgumentNullException(nameof(id));
@@ -34,9 +34,9 @@ public abstract class Entity<TId> where TId : EntityId
     //and a null value unequal to any non-null value.
     //If both operands are non-null, the lifted operator unwraps the operands
     //and applies the underlying operator to produce the bool result.
-    public static bool? operator ==(Entity<TId>? e1, Entity<TId>? e2) =>
+    public static bool? operator ==(Entity<TEntityId>? e1, Entity<TEntityId>? e2) =>
         e1 is null && e2 is null || e1 is not null && e1.Equals(e2);
-    public static bool? operator !=(Entity<TId>? e1, Entity<TId>? e2) => !(e1 == e2);
+    public static bool? operator !=(Entity<TEntityId>? e1, Entity<TEntityId>? e2) => !(e1 == e2);
 
     public override bool Equals(object? obj)
     {
@@ -44,7 +44,7 @@ public abstract class Entity<TId> where TId : EntityId
             return false;
         if (GetType() != obj.GetType())
             return false;
-        var entity = (Entity<TId>)obj;
+        var entity = (Entity<TEntityId>)obj;
         return Id == entity.Id;
     }
 

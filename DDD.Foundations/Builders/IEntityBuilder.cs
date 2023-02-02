@@ -1,6 +1,6 @@
 ﻿namespace DDD.Foundations;
 
-public interface IEntityBuilder<E, I> where E : Entity<I> where I : EntityId
+public interface IEntityBuilder<TEntity, TEntityId> where TEntity : Entity<TEntityId> where TEntityId : EntityId
 {
-    E? Build();
+    TEntity? Build();
 }
