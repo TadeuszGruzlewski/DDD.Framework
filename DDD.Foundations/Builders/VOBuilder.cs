@@ -12,8 +12,6 @@ public abstract class VOBuilder<VO> : IVOBuilder<VO> where VO : ValueObject
 
     public VO? Build()
     {
-//        ValueObject?.Validate<VO>(errors);
-
         ValueObject?.Validate(errors);
         return errors.Any() ? null : ValueObject;
     }

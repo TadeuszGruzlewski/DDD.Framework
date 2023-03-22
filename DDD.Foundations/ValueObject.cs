@@ -22,7 +22,7 @@ public abstract record class ValueObject
 
 
 
-
+    // This part will be used in future auto validation of VO
     //public void Validate<T>(List<InvariantError> errors) where T : ValueObject
     //{
     //    var flags = BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.FlattenHierarchy;
